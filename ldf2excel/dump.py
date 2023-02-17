@@ -10,6 +10,9 @@ from load import loadst
 import xlsxwriter
 
 def write_excel_line(worksheet, row, col, row_array, style):
+
+    print("def : dump - write_excel_line")
+
     # type: (xlsxwriter.workbook.Worksheet, int, int, typing.Sequence[typing.Any], xlsxwriter.workbook.Format) -> int
 
     for item in row_array:
@@ -19,6 +22,9 @@ def write_excel_line(worksheet, row, col, row_array, style):
 
 
 def dumpp(ldf, outfile):
+
+    print("def : dump - dumpp")
+
     workbook = xlsxwriter.Workbook(outfile)
     worksheet = workbook.add_worksheet('LIN Attributes')
     global sty_header

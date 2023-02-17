@@ -29,6 +29,7 @@ class LIN_attr(object):
     LIN_channel = attr.ib(default=str)
 
     def speed(self, LIN_speed):
+        print("def : LDFstruct - LIN_attr - speed")
         self.LIN_speed = float(LIN_speed / 1000)
         return self.LIN_speed
 
@@ -76,6 +77,7 @@ class node_attr(object):
     configurable_frames = attr.ib(default=dict)
 
     def role(self, role):
+        print("def : LDFstruct - node_attr - role")
         if role =='Master':
             self.role = "master"
             return self.role
@@ -84,30 +86,37 @@ class node_attr(object):
             return self.role
 
     def time_base(self, time_base):
+        print("def : LDFstruct - node_attr - time_base")
         self.time_base = time_base * 1000
         return self.time_base
 
     def jitter(self, jitter):
+        print("def : LDFstruct - node_attr - jitter")
         self.jitter = jitter * 1000
         return self.jitter
 
     def set_P2min(self, P2min):
+        print("def : LDFstruct - node_attr - set_P2min")
         self.P2min = P2min * 1000
         return self.P2min
 
     def set_STmin(self, STmin):
+        print("def : LDFstruct - node_attr - set_STmin")
         self.STmin = STmin * 1000
         return self.STmin
 
     def set_N_As(self, N_As):
+        print("def : LDFstruct - node_attr - set_N_As")
         self.N_As = N_As * 1000
         return self.N_As
 
     def set_N_Cr(self, N_Cr):
+        print("def : LDFstruct - node_attr - set_N_Cr")
         self.N_Cr = N_Cr * 1000
         return self.N_Cr
 
     def set_configurable_frames(self, configurable_frames):
+        print("def : LDFstruct - node_attr - set_configurable_frames")
         cfarray = str()
         if type(configurable_frames) is dict:
             for key, val in configurable_frames.items():
@@ -152,6 +161,7 @@ class FS_attr(object):
     signal_representation = attr.ib(default=dict)
 
     def set_init_value(self, init_value):
+        print("def : LDFstruct - FS_attr - set_init_value")
         if type(init_value) == list:
             initval = str()
             for val in init_value:
@@ -203,4 +213,5 @@ class table_attr(object):  # event triggered frame
     frame_index = attr.ib(default=str)
 
     def set_delay(self, delay):
+        print("def : LDFstruct - table_attr - set_delay")
         self.delay = delay * 1000

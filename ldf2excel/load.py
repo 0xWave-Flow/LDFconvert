@@ -7,6 +7,9 @@ import attr
 
 
 def loadd(type, ldf):
+
+    print("def : load - loadd")
+
     # load LIN attributes
     if type == 'LIN':
         LINarray = []
@@ -169,6 +172,9 @@ def loadd(type, ldf):
 
 
 def loadfs(type, ldff, ldf, signal):
+
+    print("def : load - loadfs")
+
     if type == 'frame and signal':
         fsarray = []
         fs = LDFstruct.FS_attr
@@ -224,6 +230,9 @@ def loadfs(type, ldff, ldf, signal):
 
 
 def loadst(type, ldfst, ldfslot):
+
+    print("def : load - loadst")
+
     if type == "schedule_tables":
         starray = []
         st = LDFstruct.table_attr

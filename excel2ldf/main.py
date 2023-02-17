@@ -10,6 +10,9 @@ from collections import OrderedDict
 import json
 
 if __name__ == "__main__":
+
+    print("def : main - __main__")
+
     infile = ""
     outfile = ""
     infile = sys.argv[1]

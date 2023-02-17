@@ -8,6 +8,9 @@ import xlrd
 
 
 def dumpp(infile, outfile):
+
+    print("def : dump - dumpp")
+
     # load excel
     wb = xlrd.open_workbook(infile)
     f = open(outfile, "w")
@@ -30,8 +33,12 @@ def dumpp(infile, outfile):
 
     for idx in range(len(lin_attr)):
         if lin_attr[idx] != 'LIN_speed' and str(table.row_values(1)[idx]) != '/':
+            tmp = lin_attr[idx] + ' = "' + str(table.row_values(1)[idx]) + '";\n'
+            print(tmp)
             f.write(lin_attr[idx] + ' = "' + str(table.row_values(1)[idx]) + '";\n')
         elif lin_attr[idx] == 'LIN_speed':
+            tmp = lin_attr[idx] + ' = ' + str(table.row_values(1)[idx]) + ' kbps;\n'
+            print(tmp)
             f.write(lin_attr[idx] + ' = ' + str(table.row_values(1)[idx]) + ' kbps;\n')
     f.write('\n')
 
@@ -44,7 +51,9 @@ def dumpp(infile, outfile):
     # read and write master and slaves
     for row in range(1, table.nrows):
         node_data = table.row_values(row)
+
         if node_data[1] == 'master':
+            print("def : dump - dumpp - MASTER : {}".format(node_data))
             f.write(
                 "Master: " + str(node_data[0]) + ', ' + str(int(node_data[2])) + " ms, " + str(node_data[3]) + "ms;")
         else:
@@ -52,6 +61,7 @@ def dumpp(infile, outfile):
 
     f.write("\n\tSlaves: ")
     for slave in slavelist:
+        print("def : dump - dumpp - SLAVE : {}".format(slave))
         if slave != slavelist[-1]:
             f.write(slave + ", ")
         else:
@@ -67,6 +77,7 @@ def dumpp(infile, outfile):
     # read and write signals
     for row in range(1, table.nrows):
         signal_data = table.row_values(row)
+        print("def : dump - dumpp - SIGNAL : {}".format(signal_data))
         if type(signal_data[6]) == str:
             f.write('\t' + str(signal_data[3]) + ": " + str(int(signal_data[5])) + ', {' + signal_data[6] +
                     '}, ' + str(signal_data[7]) + ', ' + str(signal_data[8]) + ';\n')
@@ -86,7 +97,7 @@ def dumpp(infile, outfile):
     framelist = []
     for row in range(1, table.nrows):
         frame_data = table.row_values(row)
-
+        print("def : dump - dumpp - FRAME : {}".format(frame_data))
         # first frame in excel
         if frame_data[0] not in framelist and row == 1:
             f.write('\t' + str(frame_data[0]) + ": " + str(format(int(frame_data[1]), '#04x')) + ', ' + str(
@@ -295,8 +306,10 @@ def dumpp(infile, outfile):
         for row in range(1, table.nrows):
             encode_data = table.row_values(row)
             if encode_data[9] != '/':
+                print("def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : {}".format(encode_data[9]))
                 encode_data[9] = encode_data[9].replace(' ', '')
                 encode_data[9] = encode_data[9].replace('\n', '')
+                print("def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : {}".format(encode_data[9]))
                 encoding = encode_data[9].split(',')
                 if encoding[0] not in signal_representation.keys():
                     f.write('\t' + encoding[0] + ' {\n')

@@ -6,6 +6,9 @@ import LDFstruct
 from dump import dumpp
 
 if __name__ == "__main__":
+
+    print("def : main - __main__")
+
     infile = ""
     outfile = ""
     infile = sys.argv[1]
