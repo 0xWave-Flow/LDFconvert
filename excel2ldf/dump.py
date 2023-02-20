@@ -157,7 +157,7 @@ def dumpp(infile, outfile):
         if frame_data[0] != 'event_triggered_frames':
             continue
         else:
-            f.write('\t' + frame_data[1] + ' : ' + frame_data[2] + ', ' + str(format(int(frame_data[3]), '#04x')) + ', ' + frame_data[4] + ';\n')
+            f.write('\t' + frame_data[1] + ' : ' + frame_data[2] + ', ' + str(int(frame_data[3])) + ', ' + frame_data[4] + ';\n')
     if etf == 1:
         f.write('}\n\n')
     # Diagnostic frames (optional)
@@ -175,11 +175,11 @@ def dumpp(infile, outfile):
         if node_data[1] == 'slave':
             f.write('\t' + node_data[0] + ' {\n')
             f.write('\t\t' + 'LIN_protocol = "' + str(node_data[6]) + '";\n')
-            f.write('\t\t' + 'configured_NAD = ' + str(int(node_data[4])) + ';\n')
+            f.write('\t\t' + 'configured_NAD = ' + str(format(int(node_data[4]), '#x')) + ';\n')
             if node_data[5] != '/':
-                f.write('\t\t' + 'initial_NAD = ' + str(format(int(node_data[5]), '#04x')) + ';\n')
-            f.write('\t\t' + 'product_id = ' + str(format(int(node_data[7]), '#06x')) + ', ' +
-                    str(int(node_data[8])) + ', ' + str(int(node_data[9])) + ';\n')
+                f.write('\t\t' + 'initial_NAD = ' + str(format(int(node_data[5]), '#x')) + ';\n')
+            f.write('\t\t' + 'product_id = ' + str(format(int(node_data[7]), '#x')) + ', ' +
+                    str(format(int(node_data[8]),'#x')) + ', ' + str(int(node_data[9])) + ';\n')
             if node_data[14] != '/':
                 f.write('\t\t' + 'response_error = ' + str(node_data[14]) + ';\n')
             if node_data[15] != '/':

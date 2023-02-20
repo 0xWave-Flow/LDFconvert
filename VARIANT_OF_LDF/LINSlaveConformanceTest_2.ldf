@@ -55,15 +55,15 @@ Frames {
 }
 
 Event_triggered_frames {
-	ETF_MotorState_Event : CollisionResolver2, 0x38, MotorState_Event, MotorState_Event_2;
+	ETF_MotorState_Event : CollisionResolver2, 56, MotorState_Event, MotorState_Event_2;
 }
 
 Node_attributes {
 	VectorSlave2_1 {
 		LIN_protocol = "2.1";
-		configured_NAD = 5;
-		initial_NAD = 0x05;
-		product_id = 0x001e, 2, 1;
+		configured_NAD = 0x5;
+		initial_NAD = 0x5;
+		product_id = 0x1e, 0x2, 1;
 		response_error = MotorLinError;
 		P2_min = 0 ms;
 		ST_min = 0 ms;
@@ -77,8 +77,8 @@ Node_attributes {
 	}
 	VectorSlave2_0 {
 		LIN_protocol = "2.0";
-		configured_NAD = 1;
-		product_id = 0x001e, 1, 0;
+		configured_NAD = 0x1;
+		product_id = 0x1e, 0x1, 0;
 		response_error = MotorLinError_2;
 		P2_min = 50 ms;
 		ST_min = 0 ms;
