@@ -329,11 +329,14 @@ def dumpp(infile, outfile):
                             f.write('\t\tlogical_value, ' + encoding[idx + 1] + ', "' + encoding[idx + 2] + '";\n')
                             idx += 3
                         elif encoding[idx] == 'physical':
-                            f.write('\t\tphysical_value, ' + encoding[idx + 1] + ', ' + encoding[idx + 2] + ', ' +
-                                    encoding[idx + 3] + ', ' + encoding[idx + 4] + ', "' + encoding[idx + 5] + '";\n')
+                            if encoding[idx + 5] != "None":
+                                f.write('\t\tphysical_value, ' + encoding[idx + 1] + ', ' + encoding[idx + 2] + ', ' +
+                                        encoding[idx + 3] + ', ' + encoding[idx + 4] + ', "' + encoding[idx + 5] + '";\n')
+                            else:
+                                f.write('\t\tphysical_value, ' + encoding[idx + 1] + ', ' + encoding[idx + 2] + ', ' +
+                                        encoding[idx + 3] + ', ' + encoding[idx + 4] + ', ;\n')
                             idx += 6
                     f.write('\t}\n')
-
 
                 else:
                     signal_representation[encoding[0]] += ', ' + encode_data[3]
