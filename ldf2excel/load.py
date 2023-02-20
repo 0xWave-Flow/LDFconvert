@@ -93,8 +93,11 @@ def loadd(type, ldf):
         slavenode.variantID = ldf["product_id"]["variant"]
         slavearray.append(slavenode.variantID)
 
-        slavenode.set_P2min(slavenode, ldf["P2_min"])
-        slavearray.append(slavenode.P2min)
+        if "P2_min" in ldf:
+            slavenode.set_P2min(slavenode, ldf["P2_min"])
+            slavearray.append(slavenode.P2min)
+        else:
+            slavearray.append(0)
 
         slavenode.set_STmin(slavenode, ldf["ST_min"])
         slavearray.append(slavenode.STmin)
