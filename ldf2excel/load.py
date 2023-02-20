@@ -99,8 +99,11 @@ def loadd(type, ldf):
         else:
             slavearray.append(0)
 
-        slavenode.set_STmin(slavenode, ldf["ST_min"])
-        slavearray.append(slavenode.STmin)
+        if "ST_min" in ldf:
+            slavenode.set_STmin(slavenode, ldf["ST_min"])
+            slavearray.append(slavenode.STmin)
+        else:
+            slavearray.append(0)
 
         try:
             slavenode.set_N_As(slavenode, ldf["N_As_timeout"])
