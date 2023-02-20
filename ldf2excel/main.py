@@ -15,5 +15,6 @@ if __name__ == "__main__":
     outfile = sys.argv[2]
     path = os.path.join(os.path.dirname(__file__), infile)
     ldf = ldfparser.parse_ldf_to_dict(path)
+    print("def : main - LDF PARSER : {}".format(ldf))
     # dumpp(json.dumps(ldf), outfile)
     dumpp(ldf, outfile)

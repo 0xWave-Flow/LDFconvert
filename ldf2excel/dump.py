@@ -81,6 +81,7 @@ def dumpp(ldf, outfile):
         worksheet.set_column(col, col, 10)
 
     # write head_top
+    print("def : dump - dumpp - ROW - 1 : {}".format(row_array))
     write_excel_line(worksheet, 0, 0, row_array, sty_header)
 
     # set row to row 1 (row = 0 is header)
@@ -90,6 +91,7 @@ def dumpp(ldf, outfile):
     frontRow = loadd("LIN", ldf)
 
     # write excel lines and return col
+    print("def : dump - dumpp - ROW - 2 : {}".format(frontRow))
     col = write_excel_line(worksheet, row, 0, frontRow, sty_first_frame)
 
     # add filter and freeze head_top
@@ -124,6 +126,7 @@ def dumpp(ldf, outfile):
         worksheet.set_column(col, col, 10)
 
     # write head_top
+    print("def : dump - dumpp - ROW - 3 : {}".format(row_array))
     write_excel_line(worksheet, 0, 0, row_array, sty_header)
 
     # set row to row 1 (row = 0 is header)
@@ -133,11 +136,13 @@ def dumpp(ldf, outfile):
     frontRow = loadd("node master", ldf)
 
     # write excel lines and return col
+    print("def : dump - dumpp - ROW - 4 : {}".format(frontRow))
     col = write_excel_line(worksheet, row, 0, frontRow, sty_first_frame)
     row += 1
 
     for ldfnode in ldf["node_attributes"]:
         frontRow = loadd("node slaves", ldfnode)
+        print("def : dump - dumpp - ROW -> : {}".format(frontRow))
         col = write_excel_line(worksheet, row, 0, frontRow, sty_first_frame)
         row += 1
 
@@ -166,6 +171,7 @@ def dumpp(ldf, outfile):
     worksheet.set_column(9, 9, 30)
 
     # write head_top
+    print("def : dump - dumpp - ROW - 5 : {}".format(row_array))
     write_excel_line(worksheet, 0, 0, row_array, sty_header)
 
     # set row to row 1 (row = 0 is header)
@@ -177,6 +183,7 @@ def dumpp(ldf, outfile):
             frontRow = loadfs("frame and signal", ldff, ldf, signal)
             worksheet.set_row(row, 60)
             # write excel lines and return col
+            print("def : dump - dumpp - ROW -> : {}".format(frontRow))
             col = write_excel_line(worksheet, row, 0, frontRow, sty_signal_representation)
 
             # Signal representation exist
@@ -206,6 +213,7 @@ def dumpp(ldf, outfile):
         worksheet.set_column(col, col, 15)
 
     # write head_top
+    print("def : dump - dumpp - ROW - 6 : {}".format(row_array))
     write_excel_line(worksheet, 0, 0, row_array, sty_header)
 
     # set row to row 1 (row = 0 is header)
@@ -215,12 +223,14 @@ def dumpp(ldf, outfile):
     if 'event_triggered_frames' in ldf.keys():
         for etf in ldf["event_triggered_frames"]:
             frontRow = loadd("event_triggered_frames", etf)
+            print("def : dump - dumpp - ROW -> : {}".format(frontRow))
             col = write_excel_line(worksheet, row, 0, frontRow, sty_first_frame)
             row += 1
 
     if 'sporadic_frames' in ldf.keys():
         for sf in ldf["sporadic_frames"]:
             frontRow = loadd("sporadic_frames", sf)
+            print("def : dump - dumpp - ROW -> : {}".format(frontRow))
             col = write_excel_line(worksheet, row, 0, frontRow, sty_first_frame)
             row += 1
 
@@ -247,6 +257,7 @@ def dumpp(ldf, outfile):
         worksheet.set_column(col, col, 15)
 
     # write head_top
+    print("def : dump - dumpp - ROW - 7 : {}".format(row_array))
     write_excel_line(worksheet, 0, 0, row_array, sty_header)
 
     # set row to row 1 (row = 0 is header)
@@ -260,10 +271,12 @@ def dumpp(ldf, outfile):
 
             # new table detected
             if nowtable != frontRow[0]:
+                print("def : dump - dumpp - ROW -> NEW TABLE DETECTED : {}".format(frontRow))
                 col = write_excel_line(worksheet, row, 0, frontRow, sty_first_frame)
 
             # slots in same table
             else:
+                print("def : dump - dumpp - ROW -> SLOTS IN SAME TABLE : {}".format(frontRow[1:]))
                 col = write_excel_line(worksheet, row, 1, frontRow[1:], sty_norm)
 
             nowtable = frontRow[0]

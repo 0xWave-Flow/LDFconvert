@@ -191,14 +191,23 @@ def dumpp(infile, outfile):
             if node_data[13] != '/':
                 f.write('\t\t' + 'N_Cr_timeout = ' + str(int(node_data[13])) + ' ms;\n')
             f.write('\t\tconfigurable_frames {\n')  # + '\t\t}\n\t}\n')
+
+            print("def : dump - dumpp - TRACE BUG : {}".format(node_data[16]))
+            print("def : dump - dumpp - TRACE BUG : {}".format(node_data[16]))
+
             cf = node_data[16].split(', ')
-            if cf[1].isdigit():
-                for i in range(0, len(cf), 2):
-                    f.write('\t\t\t' + cf[i] + ' = ' + str(format(int(cf[i + 1]), '#06x')) + ';\n')
-                f.write('\t\t}\n\t}\n')
-            elif type(cf[1]) == str:
-                for i in range(len(cf)):
-                    f.write('\t\t\t' + cf[i] + ';\n')
+
+            if(len(cf) >= 2):
+                if cf[1].isdigit():
+                    for i in range(0, len(cf), 2):
+                        f.write('\t\t\t' + cf[i] + ' = ' + str(format(int(cf[i + 1]), '#06x')) + ';\n')
+                    f.write('\t\t}\n\t}\n')
+                elif type(cf[1]) == str:
+                    for i in range(len(cf)):
+                        f.write('\t\t\t' + cf[i] + ';\n')
+                    f.write('\t\t}\n\t}\n')
+            else:
+                f.write('\t\t\t' + cf[0] + ';\n')
                 f.write('\t\t}\n\t}\n')
 
     f.write('}\n\n')
@@ -295,8 +304,9 @@ def dumpp(infile, outfile):
     sheet = 'Frame and Signal Attributes'
     table = wb.sheet_by_name(sheet)
     encode = 0
-    for row in range(table.nrows):
+    for row in range(1,table.nrows):
         encode_data = table.row_values(row)
+        print("def : dump - dumpp - FIND BUG : SIGNAL ENCODING : {}".format(encode_data))
         if encode_data[9] != '/':
             encode = 1
             break

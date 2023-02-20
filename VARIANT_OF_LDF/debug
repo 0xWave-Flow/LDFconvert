@@ -1,0 +1,27 @@
+def : main - __main__
+def : dump - dumpp
+LIN_protocol_version = "2.2";
+
+LIN_language_version = "2.2";
+
+LIN_speed = 19.2 kbps;
+
+def : dump - dumpp - MASTER : ['LINMaster', 'master', 1.0, 0.1, '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/']
+def : dump - dumpp - SLAVE : FrontLeftDoor
+def : dump - dumpp - SLAVE : RearLeftDoor
+def : dump - dumpp - SIGNAL : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorSignal', 0.0, 8.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - SIGNAL : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorErrSig', 8.0, 1.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - SIGNAL : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorSignal', 0.0, 8.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - SIGNAL : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorErrSig', 8.0, 1.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FRAME : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorSignal', 0.0, 8.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FRAME : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorErrSig', 8.0, 1.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FRAME : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorSignal', 0.0, 8.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FRAME : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorErrSig', 8.0, 1.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - TRACE BUG : FrontLeftDoorMessage
+def : dump - dumpp - TRACE BUG : FrontLeftDoorMessage
+def : dump - dumpp - TRACE BUG : RearLeftDoorMessage
+def : dump - dumpp - TRACE BUG : RearLeftDoorMessage
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorSignal', 0.0, 8.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorErrSig', 8.0, 1.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorSignal', 0.0, 8.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorErrSig', 8.0, 1.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']

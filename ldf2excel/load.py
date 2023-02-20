@@ -8,13 +8,12 @@ import attr
 
 def loadd(type, ldf):
 
-    print("def : load - loadd")
-
     # load LIN attributes
     if type == 'LIN':
         LINarray = []
         LIN = LDFstruct.LIN_attr
 
+        #print("def : load - loadd - ORGANIZE : {}".format(ldf['header']))
         LIN.LIN_protocol_ver = str(ldf['protocol_version'])
         LINarray.append(LIN.LIN_protocol_ver)
 
@@ -31,10 +30,15 @@ def loadd(type, ldf):
         except:
             LINarray.append('/')
 
+        print("def : load - loadd - ORGANIZE - LIN : {}".format(LINarray))
         return LINarray
 
     # load mater node attributes
     elif type == 'node master':
+
+        #print("def : load - loadd - ORGANIZE - NODE MASTER : {}".format(ldf["nodes"]))
+        #print("def : load - loadd - ORGANIZE - NODE MASTER : {}".format(ldf["nodes"]["slaves"]))
+
         nodearray = []
         ldf = ldf["nodes"]["master"]
         masternode = LDFstruct.node_attr
@@ -53,6 +57,7 @@ def loadd(type, ldf):
         for i in range(13):
             nodearray.append("/")
 
+        print("def : load - loadd - ORGANIZE - NODE MASTER : {}".format(nodearray))
         return nodearray
 
     # load slave nodes attributes
@@ -123,6 +128,7 @@ def loadd(type, ldf):
         slavenode.set_configurable_frames(slavenode, ldf['configurable_frames'])
         slavearray.append(slavenode.configurable_frames)
 
+        print("def : load - loadd - ORGANIZE - SLAVE : {}".format(slavearray))
         return slavearray
 
     elif type == 'event_triggered_frames':
@@ -147,6 +153,7 @@ def loadd(type, ldf):
             frames += frame + ", "
         etfarray.append(frames[0:-2])
 
+        print("def : load - loadd - ORGANIZE - EVENT TRIGGER FRAME : {}".format(etfarray))
         return etfarray
 
     elif type == 'sporadic_frames':
@@ -166,6 +173,7 @@ def loadd(type, ldf):
             fr += frame + ', '
         sfarray.append(fr[0:-2])
 
+        print("def : load - loadd - ORGANIZE - SPORADIC FRAME : {}".format(sfarray))
         return sfarray
     else:
         print("error types")
@@ -173,7 +181,7 @@ def loadd(type, ldf):
 
 def loadfs(type, ldff, ldf, signal):
 
-    print("def : load - loadfs")
+    #print("def : load - loadfs - {} - {}".format(ldff,signal))
 
     if type == 'frame and signal':
         fsarray = []
@@ -211,19 +219,25 @@ def loadfs(type, ldff, ldf, signal):
                     sub += subs + ", "
                 fsarray.append(sub[0:-2])
 
-                for rep in ldf["signal_representations"]:
-                    if signal["signal"] in rep["signals"]:
-                        for encode in ldf["signal_encoding_types"]:
-                            if rep["encoding"] == encode["name"]:
-                                fs.signal_representation = str(encode)
-                                en = str()
-                                en += encode["name"] + ',\n'
-                                for value in encode["values"]:
-                                    for val in value.values():
-                                        en += str(val) + ', '
-                                    en += '\n'
-                                fsarray.append(en[0:-3])
-                                return fsarray
+
+                if "signal_representations" in ldf:
+                    for rep in ldf["signal_representations"]:
+                        print("def : load - loadfs - SIGNAL REPRESENTATION : {}".format(rep))
+                        if signal["signal"] in rep["signals"]:
+                            for encode in ldf["signal_encoding_types"]:
+                                if rep["encoding"] == encode["name"]:
+                                    fs.signal_representation = str(encode)
+                                    en = str()
+                                    en += encode["name"] + ',\n'
+                                    for value in encode["values"]:
+                                        for val in value.values():
+                                            en += str(val) + ', '
+                                        en += '\n'
+                                    fsarray.append(en[0:-3])
+                                    return fsarray
+                else:
+                    fsarray.append('/')
+                    return fsarray
         fsarray.append('/')
 
         return fsarray
@@ -231,12 +245,15 @@ def loadfs(type, ldff, ldf, signal):
 
 def loadst(type, ldfst, ldfslot):
 
-    print("def : load - loadst")
+    #print("def : load - loadst")
 
     if type == "schedule_tables":
         starray = []
         st = LDFstruct.table_attr
         st.name = ldfst["name"]
+
+        #print("def : load - loadst - {}".format(ldfslot["delay"]))
+
         starray.append(st.name)
         if ldfslot["command"]["type"].startswith('assign') or ldfslot["command"]["type"].startswith('master'):
             st.slot = "MasterReq"
@@ -271,5 +288,7 @@ def loadst(type, ldfst, ldfslot):
             starray.append(st.frame_index)
         else:
             starray.append('/')
+
+        print("def : load - loadst - SEND : {}".format(starray))
 
         return starray
