@@ -100,13 +100,13 @@ def dumpp(infile, outfile):
         print("def : dump - dumpp - FRAME : {}".format(frame_data))
         # first frame in excel
         if frame_data[0] not in framelist and row == 1:
-            f.write('\t' + str(frame_data[0]) + ": " + str(format(int(frame_data[1]), '#04x')) + ', ' + str(
+            f.write('\t' + str(frame_data[0]) + ": " + str(int(frame_data[1])) + ', ' + str(
                 frame_data[7]) + ', ' +
                     str(int(frame_data[2])) + ' {\n\t\t' + str(frame_data[3]) + ', ' + str(int(frame_data[4])) + ';\n')
 
         # detect new frame and signal
         elif frame_data[0] not in framelist:
-            f.write('\t}\n\t' + str(frame_data[0]) + ": " + str(format(int(frame_data[1]), '#04x')) + ', ' + str(
+            f.write('\t}\n\t' + str(frame_data[0]) + ": " + str(int(frame_data[1])) + ', ' + str(
                 frame_data[7]) + ', ' +
                     str(int(frame_data[2])) + ' {\n\t\t' + str(frame_data[3]) + ', ' + str(int(frame_data[4])) + ';\n')
 
@@ -175,11 +175,11 @@ def dumpp(infile, outfile):
         if node_data[1] == 'slave':
             f.write('\t' + node_data[0] + ' {\n')
             f.write('\t\t' + 'LIN_protocol = "' + str(node_data[6]) + '";\n')
-            f.write('\t\t' + 'configured_NAD = ' + str(format(int(node_data[4]), '#04x')) + ';\n')
+            f.write('\t\t' + 'configured_NAD = ' + str(int(node_data[4])) + ';\n')
             if node_data[5] != '/':
                 f.write('\t\t' + 'initial_NAD = ' + str(format(int(node_data[5]), '#04x')) + ';\n')
-            f.write('\t\t' + 'product_id = ' + str(format(int(node_data[7]), '#04x')) + ', ' +
-                    str(format(int(node_data[8]), '#04x')) + ', ' + str(int(node_data[9])) + ';\n')
+            f.write('\t\t' + 'product_id = ' + str(format(int(node_data[7]), '#06x')) + ', ' +
+                    str(int(node_data[8])) + ', ' + str(int(node_data[9])) + ';\n')
             if node_data[14] != '/':
                 f.write('\t\t' + 'response_error = ' + str(node_data[14]) + ';\n')
             if node_data[15] != '/':
