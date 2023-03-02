@@ -1,0 +1,56 @@
+def : main - __main__
+def : dump - dumpp
+LIN_protocol_version = "2.2";
+
+LIN_language_version = "2.2";
+
+LIN_speed = 19.2 kbps;
+
+def : dump - dumpp - MASTER : ['SeatECU', 'master', 5.0, 0.1, '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/']
+def : dump - dumpp - SLAVE : Motor1
+def : dump - dumpp - SLAVE : Motor2
+def : dump - dumpp - SIGNAL : ['Motor1_Dynamic', 53.0, 1.0, 'Motor1_Dynamic_Sig', 0.0, 8.0, 7.0, 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['Motor1State_Cycl', 51.0, 6.0, 'Motor1Temp', 0.0, 8.0, 5.0, 'Motor1', 'SeatECU', 'encTemperature,\nphysical, 0, 80, 0.5, -20.0, Degree']
+def : dump - dumpp - SIGNAL : ['Motor1State_Cycl', 51.0, 6.0, 'Motor1Position', 8.0, 32.0, '0, 0, 0, 0', 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['Motor1State_Cycl', 51.0, 6.0, 'Motor1LinError', 40.0, 1.0, 0.0, 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['Motor1State_Event', 54.0, 3.0, 'Motor1ErrorCode', 8.0, 8.0, 5.0, 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['Motor1State_Event', 54.0, 3.0, 'Motor1ErrorValue', 16.0, 8.0, 1.0, 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['Motor2_Dynamic', 44.0, 1.0, 'Motor2_Dynamic_Sig', 0.0, 8.0, 8.0, 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['Motor2State_Cycl', 52.0, 6.0, 'Motor2Temp', 0.0, 8.0, 0.0, 'Motor2', 'SeatECU', 'encTemperature,\nphysical, 0, 80, 0.5, -20.0, Degree']
+def : dump - dumpp - SIGNAL : ['Motor2State_Cycl', 52.0, 6.0, 'Motor2Position', 8.0, 32.0, '0, 0, 0, 0', 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['Motor2State_Cycl', 52.0, 6.0, 'Motor2LinError', 40.0, 1.0, 0.0, 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['Motor2State_Event', 55.0, 3.0, 'Motor2ErrorCode', 8.0, 8.0, 2.0, 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['Motor2State_Event', 55.0, 3.0, 'Motor2ErrorValue', 16.0, 8.0, 4.0, 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - SIGNAL : ['MotorControl', 45.0, 2.0, 'MotorDirection', 0.0, 2.0, 0.0, 'SeatECU', 'Motor1, Motor2', '/']
+def : dump - dumpp - SIGNAL : ['MotorControl', 45.0, 2.0, 'MotorSpeed', 2.0, 10.0, 0.0, 'SeatECU', 'Motor1, Motor2', 'MotorSpeed,\nphysical, 0, 0, 1.0, 0.0, rpm']
+def : dump - dumpp - SIGNAL : ['MotorControl', 45.0, 2.0, 'MotorSelection', 12.0, 4.0, 0.0, 'SeatECU', 'Motor1, Motor2', '/']
+def : dump - dumpp - FRAME : ['Motor1_Dynamic', 53.0, 1.0, 'Motor1_Dynamic_Sig', 0.0, 8.0, 7.0, 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['Motor1State_Cycl', 51.0, 6.0, 'Motor1Temp', 0.0, 8.0, 5.0, 'Motor1', 'SeatECU', 'encTemperature,\nphysical, 0, 80, 0.5, -20.0, Degree']
+def : dump - dumpp - FRAME : ['Motor1State_Cycl', 51.0, 6.0, 'Motor1Position', 8.0, 32.0, '0, 0, 0, 0', 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['Motor1State_Cycl', 51.0, 6.0, 'Motor1LinError', 40.0, 1.0, 0.0, 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['Motor1State_Event', 54.0, 3.0, 'Motor1ErrorCode', 8.0, 8.0, 5.0, 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['Motor1State_Event', 54.0, 3.0, 'Motor1ErrorValue', 16.0, 8.0, 1.0, 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['Motor2_Dynamic', 44.0, 1.0, 'Motor2_Dynamic_Sig', 0.0, 8.0, 8.0, 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['Motor2State_Cycl', 52.0, 6.0, 'Motor2Temp', 0.0, 8.0, 0.0, 'Motor2', 'SeatECU', 'encTemperature,\nphysical, 0, 80, 0.5, -20.0, Degree']
+def : dump - dumpp - FRAME : ['Motor2State_Cycl', 52.0, 6.0, 'Motor2Position', 8.0, 32.0, '0, 0, 0, 0', 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['Motor2State_Cycl', 52.0, 6.0, 'Motor2LinError', 40.0, 1.0, 0.0, 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['Motor2State_Event', 55.0, 3.0, 'Motor2ErrorCode', 8.0, 8.0, 2.0, 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['Motor2State_Event', 55.0, 3.0, 'Motor2ErrorValue', 16.0, 8.0, 4.0, 'Motor2', 'SeatECU', '/']
+def : dump - dumpp - FRAME : ['MotorControl', 45.0, 2.0, 'MotorDirection', 0.0, 2.0, 0.0, 'SeatECU', 'Motor1, Motor2', '/']
+def : dump - dumpp - FRAME : ['MotorControl', 45.0, 2.0, 'MotorSpeed', 2.0, 10.0, 0.0, 'SeatECU', 'Motor1, Motor2', 'MotorSpeed,\nphysical, 0, 0, 1.0, 0.0, rpm']
+def : dump - dumpp - FRAME : ['MotorControl', 45.0, 2.0, 'MotorSelection', 12.0, 4.0, 0.0, 'SeatECU', 'Motor1, Motor2', '/']
+def : dump - dumpp - TRACE BUG : MotorControl, Motor1State_Cycl, Motor1State_Event, ETF_MotorStates, Motor1_Dynamic
+def : dump - dumpp - TRACE BUG : MotorControl, Motor1State_Cycl, Motor1State_Event, ETF_MotorStates, Motor1_Dynamic
+def : dump - dumpp - TRACE BUG : MotorControl, Motor2State_Cycl, Motor2State_Event, ETF_MotorStates, Motor2_Dynamic
+def : dump - dumpp - TRACE BUG : MotorControl, Motor2State_Cycl, Motor2State_Event, ETF_MotorStates, Motor2_Dynamic
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['Motor1_Dynamic', 53.0, 1.0, 'Motor1_Dynamic_Sig', 0.0, 8.0, 7.0, 'Motor1', 'SeatECU', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['Motor1State_Cycl', 51.0, 6.0, 'Motor1Temp', 0.0, 8.0, 5.0, 'Motor1', 'SeatECU', 'encTemperature,\nphysical, 0, 80, 0.5, -20.0, Degree']
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : encTemperature,
+physical, 0, 80, 0.5, -20.0, Degree
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : encTemperature,physical,0,80,0.5,-20.0,Degree
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : encTemperature,
+physical, 0, 80, 0.5, -20.0, Degree
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : encTemperature,physical,0,80,0.5,-20.0,Degree
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : MotorSpeed,
+physical, 0, 0, 1.0, 0.0, rpm
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : MotorSpeed,physical,0,0,1.0,0.0,rpm

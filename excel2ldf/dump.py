@@ -116,6 +116,67 @@ def dumpp(infile, outfile):
         framelist.append(frame_data[0])
     f.write('\t}\n}\n\n')
 
+
+    sheet = 'Diagnostic_Frames'
+    table = wb.sheet_by_name(sheet)
+
+    Diag = []
+    for row in range(1, table.nrows):
+        diag_data = table.row_values(row)
+
+        FrameExist = False
+        for each in Diag:
+            if each['FrameName'] == diag_data[0]:
+                FrameExist = True
+                break
+
+        if FrameExist == True:
+
+            SignalTemp = {}
+            SignalTemp['SignalName'] = diag_data[2]
+            SignalTemp['StartBit'] = diag_data[3]
+            SignalTemp['Length'] = diag_data[4]
+            SignalTemp['InitValue'] = diag_data[5]
+
+            for each in Diag:
+                if each["FrameName"] == diag_data[0]:
+                    each["Signals"].append(SignalTemp)
+                    break
+
+        else:
+            # print("DIAG : {}".format(diag_data))
+            # Diag["FrameName"] = diag_data[0]
+            # Diag["FrameID"] = diag_data[1]
+            SignalTemp = {}
+            DiagTemp = {}
+            SignalTemp['SignalName'] = diag_data[2]
+            SignalTemp['StartBit'] = diag_data[3]
+            SignalTemp['Length'] = diag_data[4]
+            SignalTemp['InitValue'] = diag_data[5]
+            DiagTemp["FrameName"] = diag_data[0]
+            DiagTemp["FrameID"] = diag_data[1]
+            DiagTemp["Signals"] = []
+            DiagTemp["Signals"].append(SignalTemp)
+            Diag.append(DiagTemp)
+
+    f.write('Diagnostic_signals {\n')
+    for each_frm in Diag:
+        #print("def : dump - dumpp - DIAG FRAME : {}".format(each_frm))
+        for each_sig in each_frm["Signals"]:
+            #print("{}: {}, {} ;".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
+            f.write("\t{}: {}, {} ;\n".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
+    f.write('}\n')
+
+    f.write('Diagnostic_frames {\n')
+    for each_frm in Diag:
+        f.write("\t{}: {} {{\n".format(each_frm['FrameName'],hex(int(each_frm['FrameID']))))
+        #print("def : dump - dumpp - DIAG FRAME : {}".format(each_frm))
+        for each_sig in each_frm["Signals"]:
+            #print("{}: {}, {} ;".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
+            f.write("\t\t{}, {} ;\n".format(each_sig['SignalName'],int(each_sig['StartBit'])))
+        f.write('\t}\n')
+    f.write('}\n')
+
     # Sporadic frames (optional)
     sheet = 'Other Frames'
     table = wb.sheet_by_name(sheet)

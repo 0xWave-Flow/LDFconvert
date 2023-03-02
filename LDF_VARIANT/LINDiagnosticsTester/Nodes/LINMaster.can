@@ -1,0 +1,27 @@
+/*@!Encoding:1252*/
+variables
+{
+  long gNodeAddress;
+}
+
+on sysvar sysvar::LINDiagnostics::FunctionalTesterPresent
+{
+  diagRequest Door.TesterPresent_Send req;
+  
+  if (@this == 1)
+  {
+    diagSendFunctional(req);
+  }
+}
+
+on start
+{
+}
+
+on diagResponse Door.SerialNumber_Read
+{
+  write ("Received Response: Serial Number Read");
+}
+
+
+

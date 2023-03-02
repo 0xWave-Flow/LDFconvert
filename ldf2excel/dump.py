@@ -197,6 +197,33 @@ def dumpp(ldf, outfile):
     worksheet.autofilter(0, 0, row, len(fs_head_top) - 1)
     worksheet.freeze_panes(1, 0)
 
+    # third worksheet
+    worksheet = workbook.add_worksheet('Diagnostic_Frames')
+    diag_head_top = [
+        'Frame name',
+        'Frame ID',
+        'Signal',
+        'StartBit',
+        'Length',
+        'InitValue'
+    ]
+
+    row_array = diag_head_top
+
+    for col in range(0, len(row_array)):
+        worksheet.set_column(col, col, 10)
+
+    # write head_top
+    write_excel_line(worksheet, 0, 0, row_array, sty_header)
+    row = 1
+
+    frontRow = loadd("DIAGNOSTIC", ldf)
+    #print("def : dump - dumpp - ROW - DEBUG : {}".format(frontRow))
+    for each_row in frontRow:
+        #print("def : dump - dumpp - ROW - DEBUG : {}".format(each_row))
+        col = write_excel_line(worksheet, row, 0, each_row, sty_first_frame)
+        row += 1
+
     # forth worksheet
     worksheet = workbook.add_worksheet('Other Frames')
     etf_head_top = [

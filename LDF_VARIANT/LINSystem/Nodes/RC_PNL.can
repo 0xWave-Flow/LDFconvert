@@ -1,0 +1,37 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  
+}
+
+on sysvar sysvar::RemoteKey::KeyClose
+{
+  if(@sysvar::Door::OpenDoorLeft)  return;
+
+  if(@sysvar::RemoteKey::KeyClose) 
+  {
+   SetControlForeColor("Exterior Console", "StaticTextCentralLockingWarning", MakeRGB(255,0,0));
+   SetControlForeColor("Door Opener", "StaticTextControl1", MakeRGB(255,0,0));
+   SetControlForeColor("Interior Console", "StaticTextControl3", MakeRGB(255,0,0));
+  }
+}
+
+on sysvar sysvar::RemoteKey::KeyOpen
+{
+  if(@sysvar::RemoteKey::KeyOpen) 
+  {
+    SetControlForeColor("Exterior Console", "StaticTextCentralLockingWarning", MakeRGB(0,192,0));
+    SetControlForeColor("Door Opener", "StaticTextControl1", MakeRGB(0,192,0));
+    SetControlForeColor("Interior Console", "StaticTextControl3", MakeRGB(0,192,0));
+  }
+}
+
+on *
+{
+  output(this);
+}

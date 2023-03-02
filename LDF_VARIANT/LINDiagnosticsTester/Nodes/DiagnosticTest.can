@@ -1,0 +1,59 @@
+/*@!Encoding:1252*/
+variables
+{
+  long gSerialNumber = 170821;
+}
+
+void MainTest()
+{
+  TestSerialNumber();
+}
+
+testcase TestSerialNumber()
+{
+    int ret;
+    diagRequest Door.SerialNumber_Read req;
+    double output[1];
+    int i;
+    char buffer[100]; 
+
+    diagSendrequest(req);
+  
+    ret=testWaitForDiagRequestSent(req, 1000);
+    if (ret == 1) {
+      ret = TestWaitForDiagResponse(req, 0);
+
+      if (ret == 1)
+      {
+        diagGetRespParameter (req, "SerialNumber", output); 
+
+        if (gSerialNumber == output[0])
+        {
+          snprintf(buffer,elcount(buffer),"Correct serial number %f received", output[0]);
+
+          TestStepPass(buffer);
+        }
+        else
+        {
+           snprintf(buffer,elcount(buffer),"Correct serial number %f received", output[0]);
+           TestStepFail(buffer);
+        }
+        
+        
+      }
+      else
+      {
+         TestStepFail("No response received");
+      }
+    }
+    else
+    {
+      TestStepFail("Error when sending the Request <SerialNumber_Read>!");
+    }
+}
+
+on diagResponse Door.SerialNumber_Read
+{
+  write ("Handler Serial Number Read");
+}
+

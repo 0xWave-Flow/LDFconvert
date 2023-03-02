@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Vector Test Table Editor-->
+<ttroot version="19" xmlns="http://www.vector-informatik.de/ITE/TestTable/1.0">
+  <tt>
+    <tc>
+      <title>Read Serial Number</title>
+      <tcid>2b3322c9-976c-4ab4-81c7-44d5e609a376</tcid>
+      <diagservice>
+        <title />
+        <service>DiaObj_BEGIN_OF_OBJECT|3|2|Door|Identification|SerialNumber_Read|||0||CommonDiagnostics|END_OF_OBJECT_DiaObj|</service>
+        <diagrequest />
+        <diagresponse>
+          <diagparam>
+            <qualifier>DiaVal_BEGIN_OF_OBJECT|3|4|Door|Identification|SerialNumber_Read|RDBI_PR|SerialNumber|1||CommonDiagnostics|END_OF_OBJECT_DiaVal|</qualifier>
+            <phys>
+              <eq>
+                <const>170821</const>
+              </eq>
+            </phys>
+          </diagparam>
+        </diagresponse>
+      </diagservice>
+    </tc>
+    <tc>
+      <title>Check Fault Memory</title>
+      <tcid>fd113d13-94aa-466f-afca-8a3046a6a8f5</tcid>
+      <faultmem_dtcs>
+        <title />
+        <ecu>DiaObj_BEGIN_OF_OBJECT|3|0|Door|||||0||END_OF_OBJECT_DiaObj|</ecu>
+        <dtc_content>
+          <occurrence>
+            <enum>notallowed</enum>
+          </occurrence>
+          <dtc>
+            <dtcdb>DiaObj_BEGIN_OF_OBJECT|3|5|Door|P000001|Voltage too low|||1||CommonDiagnostics|END_OF_OBJECT_DiaObj|</dtcdb>
+          </dtc>
+        </dtc_content>
+        <dtc_content>
+          <occurrence>
+            <enum>notallowed</enum>
+          </occurrence>
+          <dtc>
+            <dtcdb>DiaObj_BEGIN_OF_OBJECT|3|5|Door|P000002|Voltage too high|||2||CommonDiagnostics|END_OF_OBJECT_DiaObj|</dtcdb>
+          </dtc>
+        </dtc_content>
+        <dtc_content>
+          <occurrence>
+            <enum>notallowed</enum>
+          </occurrence>
+          <dtc>
+            <dtcdb>DiaObj_BEGIN_OF_OBJECT|3|5|Door|P000003|Failure in door contact front left|||3||CommonDiagnostics|END_OF_OBJECT_DiaObj|</dtcdb>
+          </dtc>
+        </dtc_content>
+        <dtc_content>
+          <occurrence>
+            <enum>notallowed</enum>
+          </occurrence>
+          <dtc>
+            <dtcdb>DiaObj_BEGIN_OF_OBJECT|3|5|Door|P000004|Failure in door contact front right|||4||CommonDiagnostics|END_OF_OBJECT_DiaObj|</dtcdb>
+          </dtc>
+        </dtc_content>
+        <dtc_content>
+          <occurrence>
+            <enum>notallowed</enum>
+          </occurrence>
+          <dtc>
+            <dtcdb>DiaObj_BEGIN_OF_OBJECT|3|5|Door|P000005|Failure in door contact rear left|||5||CommonDiagnostics|END_OF_OBJECT_DiaObj|</dtcdb>
+          </dtc>
+        </dtc_content>
+        <dtc_content>
+          <occurrence>
+            <enum>notallowed</enum>
+          </occurrence>
+          <dtc>
+            <dtcdb>DiaObj_BEGIN_OF_OBJECT|3|5|Door|P000006|Failure in door contact rear right|||6||CommonDiagnostics|END_OF_OBJECT_DiaObj|</dtcdb>
+          </dtc>
+        </dtc_content>
+      </faultmem_dtcs>
+    </tc>
+  </tt>
+  <ttlib>
+    <ts_definitions />
+    <tc_definitions />
+    <function_definitions />
+  </ttlib>
+</ttroot>
