@@ -1,0 +1,102 @@
+def : main - __main__
+def : dump - dumpp
+LIN_protocol_version = "2.2";
+
+LIN_language_version = "2.2";
+
+LIN_speed = 19.2 kbps;
+
+def : dump - dumpp - MASTER : ['Gateway', 'master', 1.0, 0.1, '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/']
+def : dump - dumpp - SLAVE : Motor_back
+def : dump - dumpp - SLAVE : Motor_head
+def : dump - dumpp - SLAVE : Motor_horizontal
+def : dump - dumpp - SLAVE : Motor_vertical
+def : dump - dumpp - SLAVE : Seatheating
+def : dump - dumpp - SLAVE : Seatsensor
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'PowerOn', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'LockingSystem', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Heating', 'SignalWidth': 2.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Seatheating'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Driver', 'SignalWidth': 2.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Seatsensor', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Seatsensor', 'Subscribers': 'Gateway'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Seatsensor_error', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Seatsensor', 'Subscribers': 'Gateway'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Seat_up', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_vertical'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Seat_down', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_vertical'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Seat_forward', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_horizontal'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Seat_back', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_horizontal'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Seatback_forward', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_back'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Seatback_back', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_back'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Head_up', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_head'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Head_down', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_head'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Storeposition', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Gateway', 'Subscribers': 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Moto_back_error', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Motor_back', 'Subscribers': 'Gateway'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Motor_head_error', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Motor_head', 'Subscribers': 'Gateway'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Motor_horizontal_error', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Motor_horizontal', 'Subscribers': 'Gateway'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Motor_vertical_error', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Motor_vertical', 'Subscribers': 'Gateway'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'Seatheating_error', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'Seatheating', 'Subscribers': 'Gateway'}
+def : dump - dumpp - FRAME : ['GW_Ignition', 15.0, 1.0, 'PowerOn', 0.0, 1.0, 0.0, 'Gateway', 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical', '/']
+def : dump - dumpp - FRAME : ['GW_Ignition', 15.0, 1.0, 'LockingSystem', 1.0, 1.0, 0.0, 'Gateway', 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical', '/']
+def : dump - dumpp - FRAME : ['Seatheating', 21.0, 1.0, 'Heating', 0.0, 2.0, 0.0, 'Gateway', 'Seatheating', '/']
+def : dump - dumpp - FRAME : ['Seatposition', 16.0, 1.0, 'Driver', 0.0, 2.0, 0.0, 'Gateway', 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical', '/']
+def : dump - dumpp - FRAME : ['Seatsensor', 22.0, 1.0, 'Seatsensor', 0.0, 1.0, 0.0, 'Seatsensor', 'Gateway', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['Seatsensor', 22.0, 1.0, 'Seatsensor_error', 1.0, 1.0, 0.0, 'Seatsensor', 'Gateway', '/']
+def : dump - dumpp - FRAME : ['Seatsetting', 20.0, 1.0, 'Seat_up', 0.0, 1.0, 0.0, 'Gateway', 'Motor_vertical', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['Seatsetting', 20.0, 1.0, 'Seat_down', 1.0, 1.0, 0.0, 'Gateway', 'Motor_vertical', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['Seatsetting', 20.0, 1.0, 'Seat_forward', 2.0, 1.0, 0.0, 'Gateway', 'Motor_horizontal', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['Seatsetting', 20.0, 1.0, 'Seat_back', 3.0, 1.0, 0.0, 'Gateway', 'Motor_horizontal', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['Seatsetting', 20.0, 1.0, 'Seatback_forward', 4.0, 1.0, 0.0, 'Gateway', 'Motor_back', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['Seatsetting', 20.0, 1.0, 'Seatback_back', 5.0, 1.0, 0.0, 'Gateway', 'Motor_back', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['Seatsetting', 20.0, 1.0, 'Head_up', 6.0, 1.0, 0.0, 'Gateway', 'Motor_head', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['Seatsetting', 20.0, 1.0, 'Head_down', 7.0, 1.0, 0.0, 'Gateway', 'Motor_head', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['StoreSeatposition', 17.0, 1.0, 'Storeposition', 0.0, 1.0, 0.0, 'Gateway', 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - FRAME : ['Motor_back_state', 0.0, 1.0, 'Moto_back_error', 0.0, 1.0, 0.0, 'Motor_back', 'Gateway', '/']
+def : dump - dumpp - FRAME : ['Motor_head_state', 1.0, 1.0, 'Motor_head_error', 0.0, 1.0, 0.0, 'Motor_head', 'Gateway', '/']
+def : dump - dumpp - FRAME : ['Motor_horizontal_state', 2.0, 1.0, 'Motor_horizontal_error', 0.0, 1.0, 0.0, 'Motor_horizontal', 'Gateway', '/']
+def : dump - dumpp - FRAME : ['Motor_vertical_state', 3.0, 1.0, 'Motor_vertical_error', 0.0, 1.0, 0.0, 'Motor_vertical', 'Gateway', '/']
+def : dump - dumpp - FRAME : ['Seatheating_state', 4.0, 1.0, 'Seatheating_error', 0.0, 1.0, 0.0, 'Seatheating', 'Gateway', '/']
+def : dump - dumpp - TRACE BUG : Motor_back_state, Seatposition, GW_Ignition, Seatsetting, StoreSeatposition
+def : dump - dumpp - TRACE BUG : Motor_back_state, Seatposition, GW_Ignition, Seatsetting, StoreSeatposition
+def : dump - dumpp - TRACE BUG : Motor_head_state, Seatposition, GW_Ignition, Seatsetting, StoreSeatposition
+def : dump - dumpp - TRACE BUG : Motor_head_state, Seatposition, GW_Ignition, Seatsetting, StoreSeatposition
+def : dump - dumpp - TRACE BUG : Motor_horizontal_state, Seatposition, GW_Ignition, Seatsetting, StoreSeatposition
+def : dump - dumpp - TRACE BUG : Motor_horizontal_state, Seatposition, GW_Ignition, Seatsetting, StoreSeatposition
+def : dump - dumpp - TRACE BUG : Motor_vertical_state, Seatposition, GW_Ignition, Seatsetting, StoreSeatposition
+def : dump - dumpp - TRACE BUG : Motor_vertical_state, Seatposition, GW_Ignition, Seatsetting, StoreSeatposition
+def : dump - dumpp - TRACE BUG : Seatheating_state, Seatheating
+def : dump - dumpp - TRACE BUG : Seatheating_state, Seatheating
+def : dump - dumpp - TRACE BUG : Seatsensor
+def : dump - dumpp - TRACE BUG : Seatsensor
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['GW_Ignition', 15.0, 1.0, 'PowerOn', 0.0, 1.0, 0.0, 'Gateway', 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['GW_Ignition', 15.0, 1.0, 'LockingSystem', 1.0, 1.0, 0.0, 'Gateway', 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['Seatheating', 21.0, 1.0, 'Heating', 0.0, 2.0, 0.0, 'Gateway', 'Seatheating', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['Seatposition', 16.0, 1.0, 'Driver', 0.0, 2.0, 0.0, 'Gateway', 'Motor_back, Motor_head, Motor_horizontal, Motor_vertical', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['Seatsensor', 22.0, 1.0, 'Seatsensor', 0.0, 1.0, 0.0, 'Seatsensor', 'Gateway', 'StandardPhys_Sig_Type,\nphysical, 0, 0, 1.0, 0.0, None']
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None
+def : dump - dumpp - SIGNAL ENCODING TYPES - BEFORE : StandardPhys_Sig_Type,
+physical, 0, 0, 1.0, 0.0, None
+def : dump - dumpp - SIGNAL ENCODING TYPES - AFTER : StandardPhys_Sig_Type,physical,0,0,1.0,0.0,None

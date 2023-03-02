@@ -177,6 +177,9 @@ def dumpp(ldf, outfile):
     # set row to row 1 (row = 0 is header)
     row = 1
 
+    print("def : dump - dumpp - PRINT FRAMES : {}".format(ldf["frames"]))
+    #print("def : dump - dumpp - PRINT SIGNALS : {}".format(ldff["signals"]))
+
     # get data from load.py
     for ldff in ldf["frames"]:
         for signal in ldff["signals"]:

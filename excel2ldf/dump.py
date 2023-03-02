@@ -55,7 +55,7 @@ def dumpp(infile, outfile):
         if node_data[1] == 'master':
             print("def : dump - dumpp - MASTER : {}".format(node_data))
             f.write(
-                "Master: " + str(node_data[0]) + ', ' + str(int(node_data[2])) + " ms, " + str(node_data[3]) + "ms;")
+                "Master: " + str(node_data[0]) + ', ' + str(int(node_data[2])) + " ms, " + str(node_data[3]) + " ms;")
         else:
             slavelist.append(node_data[0])
 
@@ -69,23 +69,61 @@ def dumpp(infile, outfile):
     f.write('\n')
     # Node composition (optional)
 
+
+
+    Signal = []
     # Signals (Required)
     sheet = 'Frame and Signal Attributes'
     table = wb.sheet_by_name(sheet)
-    f.write('Signals {\n')
-
-    # read and write signals
     for row in range(1, table.nrows):
         signal_data = table.row_values(row)
-        print("def : dump - dumpp - SIGNAL : {}".format(signal_data))
-        if type(signal_data[6]) == str:
-            f.write('\t' + str(signal_data[3]) + ": " + str(int(signal_data[5])) + ', {' + signal_data[6] +
-                    '}, ' + str(signal_data[7]) + ', ' + str(signal_data[8]) + ';\n')
-        else:
-            f.write('\t' + str(signal_data[3]) + ": " + str(int(signal_data[5])) + ', ' + str(int(signal_data[6])) +
-                    ', ' + str(signal_data[7]) + ', ' + str(signal_data[8]) + ';\n')
 
+        SignalExisted = False
+        for each in Signal:
+            if each['SignalName'] == signal_data[3]:
+                SignalExisted = True
+                break
+
+        if SignalExisted == False:
+            SignalTemp = {}
+            SignalTemp['SignalName'] = signal_data[3]
+            SignalTemp['SignalWidth'] = signal_data[5]
+            SignalTemp['SignalInitValue'] = signal_data[6]
+            SignalTemp['Publisher'] = signal_data[7]
+            SignalTemp['Subscribers'] = signal_data[8]
+
+            print("def : dump - dumpp - SIGNAL - BUG : ",SignalTemp)
+            Signal.append(SignalTemp)
+
+    f.write('Signals {\n')
+    for each_signal in Signal:
+
+        if (not isinstance(each_signal['SignalInitValue'],float)) and "," in each_signal['SignalInitValue']:
+
+            f.write("\t{}: {}, {{{}}}, {}, {} ;\n".format(each_signal['SignalName'], int(each_signal['SignalWidth']),
+                                                      each_signal['SignalInitValue'], each_signal['Publisher'],
+                                                      each_signal['Subscribers']))
+        else:
+            f.write("\t{}: {}, {}, {}, {} ;\n".format(each_signal['SignalName'],int(each_signal['SignalWidth']),int(each_signal['SignalInitValue']),each_signal['Publisher'],each_signal['Subscribers']))
     f.write('}\n\n')
+
+    # Signals (Required)
+    # sheet = 'Frame and Signal Attributes'
+    # table = wb.sheet_by_name(sheet)
+    # f.write('Signals {\n')
+    #
+    # # read and write signals
+    # for row in range(1, table.nrows):
+    #     signal_data = table.row_values(row)
+    #     print("def : dump - dumpp - SIGNAL : {}".format(signal_data))
+    #     if type(signal_data[6]) == str:
+    #         f.write('\t' + str(signal_data[3]) + ": " + str(int(signal_data[5])) + ', {' + signal_data[6] +
+    #                 '}, ' + str(signal_data[7]) + ', ' + str(signal_data[8]) + ';\n')
+    #     else:
+    #         f.write('\t' + str(signal_data[3]) + ": " + str(int(signal_data[5])) + ', ' + str(int(signal_data[6])) +
+    #                 ', ' + str(signal_data[7]) + ', ' + str(signal_data[8]) + ';\n')
+    #
+    # f.write('}\n\n')
     # diagnostic signal (optional)
 
     sheet = 'Diagnostic_Frames'
@@ -389,12 +427,23 @@ def dumpp(infile, outfile):
                             f.write('\t\tlogical_value, ' + encoding[idx + 1] + ', "' + encoding[idx + 2] + '";\n')
                             idx += 3
                         elif encoding[idx] == 'physical':
+
+                            #print("def : dump - dumpp - SIGNAL ENCODING TYPES - BUG BEFORE : {} - {}".format(encoding[idx + 3],encoding[idx + 4]))
+
+                            if (encoding[idx + 3]).split(".")[1] == "0":
+                                encoding[idx + 3] = (encoding[idx + 3]).split(".")[0]
+
+                            if (encoding[idx + 4]).split(".")[1] == "0":
+                                encoding[idx + 4] = (encoding[idx + 4]).split(".")[0]
+
+                            #print("def : dump - dumpp - SIGNAL ENCODING TYPES - BUG AFTER : {} - {}".format(encoding[idx + 3], encoding[idx + 4]))
+
                             if encoding[idx + 5] != "None":
                                 f.write('\t\tphysical_value, ' + encoding[idx + 1] + ', ' + encoding[idx + 2] + ', ' +
                                         encoding[idx + 3] + ', ' + encoding[idx + 4] + ', "' + encoding[idx + 5] + '";\n')
                             else:
                                 f.write('\t\tphysical_value, ' + encoding[idx + 1] + ', ' + encoding[idx + 2] + ', ' +
-                                        encoding[idx + 3] + ', ' + encoding[idx + 4] + ', ;\n')
+                                        encoding[idx + 3] + ', ' + encoding[idx + 4] + ' ;\n')
                             idx += 6
                     f.write('\t}\n')
 
