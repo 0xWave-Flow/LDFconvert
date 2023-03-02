@@ -30,6 +30,24 @@ Signals {
 	MotorSelection: 4, 0, SeatECU, Motor1, Motor2;
 }
 
+Diagnostic_signals {
+	MasterReqB0: 8, 0 ;
+	MasterReqB1: 8, 0 ;
+	MasterReqB2: 8, 0 ;
+	MasterReqB3: 8, 0 ;
+	MasterReqB4: 8, 0 ;
+	MasterReqB5: 8, 0 ;
+	MasterReqB6: 8, 0 ;
+	MasterReqB7: 8, 0 ;
+	SlaveRespB0: 8, 0 ;
+	SlaveRespB1: 8, 0 ;
+	SlaveRespB2: 8, 0 ;
+	SlaveRespB3: 8, 0 ;
+	SlaveRespB4: 8, 0 ;
+	SlaveRespB5: 8, 0 ;
+	SlaveRespB6: 8, 0 ;
+	SlaveRespB7: 8, 0 ;
+}
 Frames {
 	Motor1_Dynamic: 53, Motor1, 1 {
 		Motor1_Dynamic_Sig, 0;
@@ -62,24 +80,14 @@ Frames {
 	}
 }
 
-Diagnostic_signals {
-	MasterReqB0: 8, 0 ;
-	MasterReqB1: 8, 0 ;
-	MasterReqB2: 8, 0 ;
-	MasterReqB3: 8, 0 ;
-	MasterReqB4: 8, 0 ;
-	MasterReqB5: 8, 0 ;
-	MasterReqB6: 8, 0 ;
-	MasterReqB7: 8, 0 ;
-	SlaveRespB0: 8, 0 ;
-	SlaveRespB1: 8, 0 ;
-	SlaveRespB2: 8, 0 ;
-	SlaveRespB3: 8, 0 ;
-	SlaveRespB4: 8, 0 ;
-	SlaveRespB5: 8, 0 ;
-	SlaveRespB6: 8, 0 ;
-	SlaveRespB7: 8, 0 ;
+Sporadic_frames {
+	SporadicPollingFrame : MotorControl;
 }
+
+Event_triggered_frames {
+	ETF_MotorStates : ETF_CollisionResolving, 58, Motor1State_Event, Motor2State_Event;
+}
+
 Diagnostic_frames {
 	MasterReq: 0x3c {
 		MasterReqB0, 0 ;
@@ -102,14 +110,6 @@ Diagnostic_frames {
 		SlaveRespB7, 56 ;
 	}
 }
-Sporadic_frames {
-	SporadicPollingFrame : MotorControl;
-}
-
-Event_triggered_frames {
-	ETF_MotorStates : ETF_CollisionResolving, 58, Motor1State_Event, Motor2State_Event;
-}
-
 Node_attributes {
 	Motor1 {
 		LIN_protocol = "2.2";

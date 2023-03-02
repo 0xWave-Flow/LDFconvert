@@ -88,35 +88,6 @@ def dumpp(infile, outfile):
     f.write('}\n\n')
     # diagnostic signal (optional)
 
-    # Frames (Required)
-    sheet = 'Frame and Signal Attributes'
-    table = wb.sheet_by_name(sheet)
-    f.write('Frames {\n')
-
-    # read and write frames
-    framelist = []
-    for row in range(1, table.nrows):
-        frame_data = table.row_values(row)
-        print("def : dump - dumpp - FRAME : {}".format(frame_data))
-        # first frame in excel
-        if frame_data[0] not in framelist and row == 1:
-            f.write('\t' + str(frame_data[0]) + ": " + str(int(frame_data[1])) + ', ' + str(
-                frame_data[7]) + ', ' +
-                    str(int(frame_data[2])) + ' {\n\t\t' + str(frame_data[3]) + ', ' + str(int(frame_data[4])) + ';\n')
-
-        # detect new frame and signal
-        elif frame_data[0] not in framelist:
-            f.write('\t}\n\t' + str(frame_data[0]) + ": " + str(int(frame_data[1])) + ', ' + str(
-                frame_data[7]) + ', ' +
-                    str(int(frame_data[2])) + ' {\n\t\t' + str(frame_data[3]) + ', ' + str(int(frame_data[4])) + ';\n')
-
-        # frames with multiple signals
-        else:
-            f.write('\t\t' + str(frame_data[3]) + ', ' + str(int(frame_data[4])) + ';\n')
-        framelist.append(frame_data[0])
-    f.write('\t}\n}\n\n')
-
-
     sheet = 'Diagnostic_Frames'
     table = wb.sheet_by_name(sheet)
 
@@ -167,15 +138,33 @@ def dumpp(infile, outfile):
             f.write("\t{}: {}, {} ;\n".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
     f.write('}\n')
 
-    f.write('Diagnostic_frames {\n')
-    for each_frm in Diag:
-        f.write("\t{}: {} {{\n".format(each_frm['FrameName'],hex(int(each_frm['FrameID']))))
-        #print("def : dump - dumpp - DIAG FRAME : {}".format(each_frm))
-        for each_sig in each_frm["Signals"]:
-            #print("{}: {}, {} ;".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
-            f.write("\t\t{}, {} ;\n".format(each_sig['SignalName'],int(each_sig['StartBit'])))
-        f.write('\t}\n')
-    f.write('}\n')
+    # Frames (Required)
+    sheet = 'Frame and Signal Attributes'
+    table = wb.sheet_by_name(sheet)
+    f.write('Frames {\n')
+
+    # read and write frames
+    framelist = []
+    for row in range(1, table.nrows):
+        frame_data = table.row_values(row)
+        print("def : dump - dumpp - FRAME : {}".format(frame_data))
+        # first frame in excel
+        if frame_data[0] not in framelist and row == 1:
+            f.write('\t' + str(frame_data[0]) + ": " + str(int(frame_data[1])) + ', ' + str(
+                frame_data[7]) + ', ' +
+                    str(int(frame_data[2])) + ' {\n\t\t' + str(frame_data[3]) + ', ' + str(int(frame_data[4])) + ';\n')
+
+        # detect new frame and signal
+        elif frame_data[0] not in framelist:
+            f.write('\t}\n\t' + str(frame_data[0]) + ": " + str(int(frame_data[1])) + ', ' + str(
+                frame_data[7]) + ', ' +
+                    str(int(frame_data[2])) + ' {\n\t\t' + str(frame_data[3]) + ', ' + str(int(frame_data[4])) + ';\n')
+
+        # frames with multiple signals
+        else:
+            f.write('\t\t' + str(frame_data[3]) + ', ' + str(int(frame_data[4])) + ';\n')
+        framelist.append(frame_data[0])
+    f.write('\t}\n}\n\n')
 
     # Sporadic frames (optional)
     sheet = 'Other Frames'
@@ -222,6 +211,16 @@ def dumpp(infile, outfile):
     if etf == 1:
         f.write('}\n\n')
     # Diagnostic frames (optional)
+
+    f.write('Diagnostic_frames {\n')
+    for each_frm in Diag:
+        f.write("\t{}: {} {{\n".format(each_frm['FrameName'],hex(int(each_frm['FrameID']))))
+        #print("def : dump - dumpp - DIAG FRAME : {}".format(each_frm))
+        for each_sig in each_frm["Signals"]:
+            #print("{}: {}, {} ;".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
+            f.write("\t\t{}, {} ;\n".format(each_sig['SignalName'],int(each_sig['StartBit'])))
+        f.write('\t}\n')
+    f.write('}\n')
 
     # Node attributes (Required)
     sheet = 'Node Attributes'
