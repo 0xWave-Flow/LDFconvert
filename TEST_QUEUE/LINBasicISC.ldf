@@ -31,25 +31,6 @@ Signals {
   error: 1, 0, LinSlave, LINMaster ;
 }
 
-Diagnostic_signals {
-  MasterReqB0: 8, 0 ;
-  MasterReqB1: 8, 0 ;
-  MasterReqB2: 8, 0 ;
-  MasterReqB3: 8, 0 ;
-  MasterReqB4: 8, 0 ;
-  MasterReqB5: 8, 0 ;
-  MasterReqB6: 8, 0 ;
-  MasterReqB7: 8, 0 ;
-  SlaveRespB0: 8, 0 ;
-  SlaveRespB1: 8, 0 ;
-  SlaveRespB2: 8, 0 ;
-  SlaveRespB3: 8, 0 ;
-  SlaveRespB4: 8, 0 ;
-  SlaveRespB5: 8, 0 ;
-  SlaveRespB6: 8, 0 ;
-  SlaveRespB7: 8, 0 ;
-}
-
 
 
 Frames {
@@ -69,28 +50,6 @@ Frames {
 }
 
 
-Diagnostic_frames {
-  MasterReq: 0x3c {
-    MasterReqB0, 0 ;
-    MasterReqB1, 8 ;
-    MasterReqB2, 16 ;
-    MasterReqB3, 24 ;
-    MasterReqB4, 32 ;
-    MasterReqB5, 40 ;
-    MasterReqB6, 48 ;
-    MasterReqB7, 56 ;
-  }
-  SlaveResp: 0x3d {
-    SlaveRespB0, 0 ;
-    SlaveRespB1, 8 ;
-    SlaveRespB2, 16 ;
-    SlaveRespB3, 24 ;
-    SlaveRespB4, 32 ;
-    SlaveRespB5, 40 ;
-    SlaveRespB6, 48 ;
-    SlaveRespB7, 56 ;
-  }
-}
 
 Node_attributes {
   LinSlave{

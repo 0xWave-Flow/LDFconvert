@@ -168,13 +168,14 @@ def dumpp(infile, outfile):
             DiagTemp["Signals"].append(SignalTemp)
             Diag.append(DiagTemp)
 
-    f.write('Diagnostic_signals {\n')
-    for each_frm in Diag:
-        #print("def : dump - dumpp - DIAG FRAME : {}".format(each_frm))
-        for each_sig in each_frm["Signals"]:
-            #print("{}: {}, {} ;".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
-            f.write("\t{}: {}, {} ;\n".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
-    f.write('}\n')
+    if len(Diag) > 0:
+        f.write('Diagnostic_signals {\n')
+        for each_frm in Diag:
+            #print("def : dump - dumpp - DIAG FRAME : {}".format(each_frm))
+            for each_sig in each_frm["Signals"]:
+                #print("{}: {}, {} ;".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
+                f.write("\t{}: {}, {} ;\n".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
+        f.write('}\n')
 
     # Frames (Required)
     sheet = 'Frame and Signal Attributes'
@@ -248,17 +249,29 @@ def dumpp(infile, outfile):
             f.write('\t' + frame_data[1] + ' : ' + frame_data[2] + ', ' + str(int(frame_data[3])) + ', ' + frame_data[4] + ';\n')
     if etf == 1:
         f.write('}\n\n')
+
     # Diagnostic frames (optional)
 
-    f.write('Diagnostic_frames {\n')
-    for each_frm in Diag:
-        f.write("\t{}: {} {{\n".format(each_frm['FrameName'],hex(int(each_frm['FrameID']))))
-        #print("def : dump - dumpp - DIAG FRAME : {}".format(each_frm))
-        for each_sig in each_frm["Signals"]:
-            #print("{}: {}, {} ;".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
-            f.write("\t\t{}, {} ;\n".format(each_sig['SignalName'],int(each_sig['StartBit'])))
-        f.write('\t}\n')
-    f.write('}\n')
+    if len(Diag) > 0:
+        f.write('Diagnostic_frames {\n')
+        for each_frm in Diag:
+            f.write("\t{}: {} {{\n".format(each_frm['FrameName'], hex(int(each_frm["FrameID"]))))
+            #print("def : dump - dumpp - DIAG FRAME : {}".format(each_frm))
+            for each_sig in each_frm["Signals"]:
+                #print("{}: {}, {} ;".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
+                f.write("\t\t{}, {} ;\n".format(each_sig['SignalName'],int(each_sig['StartBit'])))
+            f.write('\t}\n')
+        f.write('}\n')
+
+    # f.write('Diagnostic_frames {\n')
+    # for each_frm in Diag:
+    #     f.write("\t{}: {} {{\n".format(each_frm['FrameName'],hex(int(each_frm['FrameID']))))
+    #     #print("def : dump - dumpp - DIAG FRAME : {}".format(each_frm))
+    #     for each_sig in each_frm["Signals"]:
+    #         #print("{}: {}, {} ;".format(each_sig['SignalName'],int(each_sig['Length']),int(each_sig['InitValue'])))
+    #         f.write("\t\t{}, {} ;\n".format(each_sig['SignalName'],int(each_sig['StartBit'])))
+    #     f.write('\t}\n')
+    # f.write('}\n')
 
     # Node attributes (Required)
     sheet = 'Node Attributes'

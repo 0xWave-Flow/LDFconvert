@@ -186,36 +186,38 @@ def loadd(type, ldf):
 
         big_diag_array = []
 
-        count = 0
-        for diag_frame in ldf['diagnostic_frames']:
-            #print("def : load - loadd - ORGANIZE - DIAGNOSTIC FRAME - 1 : {}".format(diag_frame))
-            for signal in diag_frame['signals']:
-                #print("def : load - loadd - ORGANIZE - DIAGNOSTIC SIGNAL - 1 : {} - {}".format(signal['signal'],detail_signal['name']))
-                for detail_signal in ldf['diagnostic_signals']:
+        if 'diagnostic_frames' in ldf:
 
-                    if signal['signal'] == detail_signal['name']:
-                        #print("def : load - loadd - ORGANIZE - DIAGNOSTIC SIGNAL - 1 : {} - {} - {}".format(count,signal['signal'],detail_signal['name']))
-                        diagarray = []
-                        diagarray.append(diag_frame['name'])
-                        diagarray.append(diag_frame['frame_id'])
-                        diagarray.append(detail_signal['name'])
-                        diagarray.append(signal['offset'])
-                        diagarray.append(detail_signal['width'])
-                        diagarray.append(detail_signal['init_value'])
-                        big_diag_array.append(diagarray)
-                        count = count + 1
-                        #print("def : load - loadd - ORGANIZE - DIAGNOSTIC SIGNAL - 1 : {} - {} - {}".format(count,len(diagarray),len(big_diag_array)))
+            count = 0
+            for diag_frame in ldf['diagnostic_frames']:
+                #print("def : load - loadd - ORGANIZE - DIAGNOSTIC FRAME - 1 : {}".format(diag_frame))
+                for signal in diag_frame['signals']:
+                    #print("def : load - loadd - ORGANIZE - DIAGNOSTIC SIGNAL - 1 : {} - {}".format(signal['signal'],detail_signal['name']))
+                    for detail_signal in ldf['diagnostic_signals']:
 
-                    #print("def : load - loadd - ORGANIZE - DIAGNOSTIC SIGNAL - 1 : {} - {} - {}".format(detail_signal['name'],detail_signal['width'],detail_signal['init_value']))
+                        if signal['signal'] == detail_signal['name']:
+                            #print("def : load - loadd - ORGANIZE - DIAGNOSTIC SIGNAL - 1 : {} - {} - {}".format(count,signal['signal'],detail_signal['name']))
+                            diagarray = []
+                            diagarray.append(diag_frame['name'])
+                            diagarray.append(diag_frame['frame_id'])
+                            diagarray.append(detail_signal['name'])
+                            diagarray.append(signal['offset'])
+                            diagarray.append(detail_signal['width'])
+                            diagarray.append(detail_signal['init_value'])
+                            big_diag_array.append(diagarray)
+                            count = count + 1
+                            #print("def : load - loadd - ORGANIZE - DIAGNOSTIC SIGNAL - 1 : {} - {} - {}".format(count,len(diagarray),len(big_diag_array)))
 
-            #sfarray.append(diag_frame['name'])
-            #sfarray.append(diag_frame['frame_id'])
+                        #print("def : load - loadd - ORGANIZE - DIAGNOSTIC SIGNAL - 1 : {} - {} - {}".format(detail_signal['name'],detail_signal['width'],detail_signal['init_value']))
+
+                #sfarray.append(diag_frame['name'])
+                #sfarray.append(diag_frame['frame_id'])
 
 
 
-        # print("def : load - loadd - ORGANIZE - DIAGNOSTIC FRAME - 1 : {}".format(ldf['diagnostic_frames'][0]['signals'][0]['signal']))
-        # print("def : load - loadd - ORGANIZE - DIAGNOSTIC FRAME - 2 : {}".format(ldf['diagnostic_frames'][1]))
-        # print("def : load - loadd - ORGANIZE - DIAGNOSTIC FRAME - 3 : {}".format(len(ldf['diagnostic_frames'])))
+            # print("def : load - loadd - ORGANIZE - DIAGNOSTIC FRAME - 1 : {}".format(ldf['diagnostic_frames'][0]['signals'][0]['signal']))
+            # print("def : load - loadd - ORGANIZE - DIAGNOSTIC FRAME - 2 : {}".format(ldf['diagnostic_frames'][1]))
+            # print("def : load - loadd - ORGANIZE - DIAGNOSTIC FRAME - 3 : {}".format(len(ldf['diagnostic_frames'])))
 
         return big_diag_array
     else:
