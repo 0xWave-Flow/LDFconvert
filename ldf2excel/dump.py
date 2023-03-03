@@ -293,24 +293,25 @@ def dumpp(ldf, outfile):
     # set row to row 1 (row = 0 is header)
     row = 1
 
-    # get data from load.py
-    nowtable = str()
-    for ldfst in ldf["schedule_tables"]:
-        for ldfstslot in ldfst["schedule"]:
-            frontRow = loadst("schedule_tables", ldfst, ldfstslot)
+    if "schedule_tables" in ldf:
+        # get data from load.py
+        nowtable = str()
+        for ldfst in ldf["schedule_tables"]:
+            for ldfstslot in ldfst["schedule"]:
+                frontRow = loadst("schedule_tables", ldfst, ldfstslot)
 
-            # new table detected
-            if nowtable != frontRow[0]:
-                print("def : dump - dumpp - ROW -> NEW TABLE DETECTED : {}".format(frontRow))
-                col = write_excel_line(worksheet, row, 0, frontRow, sty_first_frame)
+                # new table detected
+                if nowtable != frontRow[0]:
+                    print("def : dump - dumpp - ROW -> NEW TABLE DETECTED : {}".format(frontRow))
+                    col = write_excel_line(worksheet, row, 0, frontRow, sty_first_frame)
 
-            # slots in same table
-            else:
-                print("def : dump - dumpp - ROW -> SLOTS IN SAME TABLE : {}".format(frontRow[1:]))
-                col = write_excel_line(worksheet, row, 1, frontRow[1:], sty_norm)
+                # slots in same table
+                else:
+                    print("def : dump - dumpp - ROW -> SLOTS IN SAME TABLE : {}".format(frontRow[1:]))
+                    col = write_excel_line(worksheet, row, 1, frontRow[1:], sty_norm)
 
-            nowtable = frontRow[0]
-            row += 1
+                nowtable = frontRow[0]
+                row += 1
 
     # add filter and freeze head_top
     worksheet.autofilter(0, 0, row, len(st_head_top) - 1)

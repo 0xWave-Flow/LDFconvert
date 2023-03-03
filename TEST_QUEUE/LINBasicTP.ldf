@@ -180,20 +180,5 @@ Node_attributes // Node Attributes Definition
 
 } // End of Node Attributes Definition
 
-Schedule_tables {
- MasterReq_Table {
-    MasterReq delay 10 ms ;
-  }
- SlaveResp_Table {
-    SlaveResp delay 10 ms ;
-  }
- Initialisation {
-    AssignFrameId { FrontLeftDoor, FrontLeftDoorMessage } delay 10 ms ;
-  }
- Send {
-    FrontLeftDoorMessage delay 5 ms ;
-    RearLeftDoorMessage delay 5 ms ;
-  }
-}
 
 

@@ -1,0 +1,101 @@
+/**********************************************************/
+/* This is the example convert Excel format to LDF format */
+/**********************************************************/
+
+LIN_description_file;
+LIN_protocol_version = "2.2";
+LIN_language_version = "2.2";
+LIN_speed = 19.2 kbps;
+
+Nodes {
+	Master: LINMaster, 1 ms, 0.1 ms;
+	Slaves: FrontLeftDoor, RearLeftDoor;
+}
+
+Signals {
+	FrontLeftDoorSignal: 8, 0, FrontLeftDoor, LINMaster ;
+	FrontLeftDoorErrSig: 1, 0, FrontLeftDoor, LINMaster ;
+	RearLeftDoorSignal: 8, 0, RearLeftDoor, LINMaster ;
+	RearLeftDoorErrSig: 1, 0, RearLeftDoor, LINMaster ;
+}
+
+Diagnostic_signals {
+	MasterReqB0: 8, 0 ;
+	MasterReqB1: 8, 0 ;
+	MasterReqB2: 8, 0 ;
+	MasterReqB3: 8, 0 ;
+	MasterReqB4: 8, 0 ;
+	MasterReqB5: 8, 0 ;
+	MasterReqB6: 8, 0 ;
+	MasterReqB7: 8, 0 ;
+	SlaveRespB0: 8, 0 ;
+	SlaveRespB1: 8, 0 ;
+	SlaveRespB2: 8, 0 ;
+	SlaveRespB3: 8, 0 ;
+	SlaveRespB4: 8, 0 ;
+	SlaveRespB5: 8, 0 ;
+	SlaveRespB6: 8, 0 ;
+	SlaveRespB7: 8, 0 ;
+}
+Frames {
+	FrontLeftDoorMessage: 1, FrontLeftDoor, 2 {
+		FrontLeftDoorSignal, 0;
+		FrontLeftDoorErrSig, 8;
+	}
+	RearLeftDoorMessage: 2, RearLeftDoor, 2 {
+		RearLeftDoorSignal, 0;
+		RearLeftDoorErrSig, 8;
+	}
+}
+
+Diagnostic_frames {
+	MasterReq: 0x3c {
+		MasterReqB0, 0 ;
+		MasterReqB1, 8 ;
+		MasterReqB2, 16 ;
+		MasterReqB3, 24 ;
+		MasterReqB4, 32 ;
+		MasterReqB5, 40 ;
+		MasterReqB6, 48 ;
+		MasterReqB7, 56 ;
+	}
+	SlaveResp: 0x3d {
+		SlaveRespB0, 0 ;
+		SlaveRespB1, 8 ;
+		SlaveRespB2, 16 ;
+		SlaveRespB3, 24 ;
+		SlaveRespB4, 32 ;
+		SlaveRespB5, 40 ;
+		SlaveRespB6, 48 ;
+		SlaveRespB7, 56 ;
+	}
+}
+Node_attributes {
+	FrontLeftDoor {
+		LIN_protocol = "2.2";
+		configured_NAD = 0x7;
+		product_id = 0x1e, 0x2, 0;
+		response_error = FrontLeftDoorErrSig;
+		P2_min = 51 ms;
+		ST_min = 2 ms;
+		N_As_timeout = 1001 ms;
+		N_Cr_timeout = 1002 ms;
+		configurable_frames {
+			FrontLeftDoorMessage;
+		}
+	}
+	RearLeftDoor {
+		LIN_protocol = "2.2";
+		configured_NAD = 0x8;
+		product_id = 0x1e, 0x3, 0;
+		response_error = RearLeftDoorErrSig;
+		P2_min = 51 ms;
+		ST_min = 2 ms;
+		N_As_timeout = 1001 ms;
+		N_Cr_timeout = 1002 ms;
+		configurable_frames {
+			RearLeftDoorMessage;
+		}
+	}
+}
+

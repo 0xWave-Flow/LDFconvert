@@ -1,70 +1,27 @@
 def : main - __main__
-def : main - LDF PARSER : {'header': 'lin_description_file', 'protocol_version': '2.2', 'language_version': '2.2', 'speed': 19200, 'nodes': {'master': {'name': 'LINMaster', 'timebase': 0.01, 'jitter': 0.0001}, 'slaves': ['LinSlave']}, 'signals': [{'name': 'Ramp', 'width': 8, 'init_value': 0, 'publisher': 'LINMaster', 'subscribers': ['LinSlave']}, {'name': 'constant_Signal', 'width': 8, 'init_value': 0, 'publisher': 'LINMaster', 'subscribers': ['LinSlave']}, {'name': 'Sine', 'width': 8, 'init_value': 0, 'publisher': 'LINMaster', 'subscribers': ['LinSlave']}, {'name': 'error', 'width': 1, 'init_value': 0, 'publisher': 'LinSlave', 'subscribers': ['LINMaster']}], 'frames': [{'name': 'LinExtra', 'frame_id': 34, 'publisher': 'LINMaster', 'length': 1, 'signals': [{'signal': 'constant_Signal', 'offset': 0}]}, {'name': 'LinMsg1', 'frame_id': 48, 'publisher': 'LINMaster', 'length': 2, 'signals': [{'signal': 'Sine', 'offset': 0}, {'signal': 'Ramp', 'offset': 8}]}, {'name': 'LinMsg2', 'frame_id': 38, 'publisher': 'LINMaster', 'length': 1, 'signals': [{'signal': 'constant_Signal', 'offset': 0}]}, {'name': 'LinStatus', 'frame_id': 39, 'publisher': 'LinSlave', 'length': 1, 'signals': [{'signal': 'error', 'offset': 0}]}], 'node_attributes': [{'name': 'LinSlave', 'lin_protocol': '2.2', 'configured_nad': 5, 'initial_nad': 5, 'product_id': {'supplier_id': 30, 'function_id': 2, 'variant': 1}, 'response_error': 'error', 'P2_min': 0.05, 'ST_min': 0.0, 'configurable_frames': ['LinMsg1', 'LinMsg2', 'LinExtra', 'LinStatus']}], 'schedule_tables': [{'name': 'Main_table', 'schedule': [{'command': {'type': 'frame', 'frame': 'LinMsg1'}, 'delay': 0.03}, {'command': {'type': 'frame', 'frame': 'LinMsg2'}, 'delay': 0.03}, {'command': {'type': 'frame', 'frame': 'LinStatus'}, 'delay': 0.03}]}, {'name': 'Extra_Table', 'schedule': [{'command': {'type': 'frame', 'frame': 'LinExtra'}, 'delay': 0.01}, {'command': {'type': 'frame', 'frame': 'LinStatus'}, 'delay': 0.01}]}], 'signal_encoding_types': [{'name': 'constant_Signal_Sig_Type', 'values': [{'type': 'physical', 'min': 0, 'max': 255, 'scale': 1.0, 'offset': 0.0, 'unit': None}]}, {'name': 'Sine_Sig_Type', 'values': [{'type': 'physical', 'min': 0, 'max': 255, 'scale': 1.0, 'offset': 0.0, 'unit': None}]}, {'name': 'StandardPhys_Sig_Type', 'values': [{'type': 'physical', 'min': 0, 'max': 0, 'scale': 1.0, 'offset': 0.0, 'unit': None}]}]}
 def : dump - dumpp
-def : dump - dumpp - ROW - 1 : ['LIN protocol version', 'LIN language version', 'LIN speed [kbps]', 'Channel name']
-def : dump - write_excel_line
-def : LDFstruct - LIN_attr - speed
-def : load - loadd - ORGANIZE - LIN : ['2.2', '2.2', 19.2, '/']
-def : dump - dumpp - ROW - 2 : ['2.2', '2.2', 19.2, '/']
-def : dump - write_excel_line
-def : dump - dumpp - ROW - 3 : ['Node name', 'Role', 'Time base [ms]', 'Jitter [ms]', 'Configured NAD', 'Init NAD', 'Protocol version', 'Supplied ID', 'Function ID', 'Variant ID', 'P2 min [ms]', 'ST min [ms]', 'N_As_timeout [ms]', 'N_Cr_timeout [ms]', 'Response error', 'Fault state signals', 'Configurable frames']
-def : dump - write_excel_line
-def : LDFstruct - node_attr - time_base
-def : LDFstruct - node_attr - jitter
-def : load - loadd - ORGANIZE - NODE MASTER : ['LINMaster', 'master', 10.0, 0.1, '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/']
-def : dump - dumpp - ROW - 4 : ['LINMaster', 'master', 10.0, 0.1, '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/']
-def : dump - write_excel_line
-def : LDFstruct - node_attr - set_P2min
-def : LDFstruct - node_attr - set_STmin
-def : LDFstruct - node_attr - set_configurable_frames
-def : load - loadd - ORGANIZE - SLAVE : ['LinSlave', 'slave', '/', '/', 5, 5, '2.2', 30, 2, 1, 50.0, 0.0, '/', '/', 'error', '/', 'LinMsg1, LinMsg2, LinExtra, LinStatus']
-def : dump - dumpp - ROW -> : ['LinSlave', 'slave', '/', '/', 5, 5, '2.2', 30, 2, 1, 50.0, 0.0, '/', '/', 'error', '/', 'LinMsg1, LinMsg2, LinExtra, LinStatus']
-def : dump - write_excel_line
-def : dump - dumpp - ROW - 5 : ['Frame name', 'Frame ID', 'Size [Byte]', 'Signal name', 'Startbit', 'Width [bit]', 'Init value', 'Publisher', 'Subscribers', 'Signal representation']
-def : dump - write_excel_line
-def : dump - dumpp - PRINT FRAMES : [{'name': 'LinExtra', 'frame_id': 34, 'publisher': 'LINMaster', 'length': 1, 'signals': [{'signal': 'constant_Signal', 'offset': 0}]}, {'name': 'LinMsg1', 'frame_id': 48, 'publisher': 'LINMaster', 'length': 2, 'signals': [{'signal': 'Sine', 'offset': 0}, {'signal': 'Ramp', 'offset': 8}]}, {'name': 'LinMsg2', 'frame_id': 38, 'publisher': 'LINMaster', 'length': 1, 'signals': [{'signal': 'constant_Signal', 'offset': 0}]}, {'name': 'LinStatus', 'frame_id': 39, 'publisher': 'LinSlave', 'length': 1, 'signals': [{'signal': 'error', 'offset': 0}]}]
-def : LDFstruct - FS_attr - set_init_value
-def : dump - dumpp - ROW -> : ['LinExtra', 34, 1, 'constant_Signal', 0, 8, 0, 'LINMaster', 'LinSlave', '/']
-def : dump - write_excel_line
-def : dump - write_excel_line
-def : LDFstruct - FS_attr - set_init_value
-def : dump - dumpp - ROW -> : ['LinMsg1', 48, 2, 'Sine', 0, 8, 0, 'LINMaster', 'LinSlave', '/']
-def : dump - write_excel_line
-def : dump - write_excel_line
-def : LDFstruct - FS_attr - set_init_value
-def : dump - dumpp - ROW -> : ['LinMsg1', 48, 2, 'Ramp', 8, 8, 0, 'LINMaster', 'LinSlave', '/']
-def : dump - write_excel_line
-def : dump - write_excel_line
-def : LDFstruct - FS_attr - set_init_value
-def : dump - dumpp - ROW -> : ['LinMsg2', 38, 1, 'constant_Signal', 0, 8, 0, 'LINMaster', 'LinSlave', '/']
-def : dump - write_excel_line
-def : dump - write_excel_line
-def : LDFstruct - FS_attr - set_init_value
-def : dump - dumpp - ROW -> : ['LinStatus', 39, 1, 'error', 0, 1, 0, 'LinSlave', 'LINMaster', '/']
-def : dump - write_excel_line
-def : dump - write_excel_line
-def : dump - write_excel_line
-def : dump - dumpp - ROW - 6 : ['Type', 'Event name', 'Collision resolving table', 'Frame ID', 'Frames']
-def : dump - write_excel_line
-def : dump - dumpp - ROW - 7 : ['Table name', 'Slot', 'Type', 'Delay [ms]', 'Node', 'Frame', 'Frame index']
-def : dump - write_excel_line
-def : LDFstruct - table_attr - set_delay
-def : load - loadst - SEND : ['Main_table', 'LinMsg1', 'frame', 30.0, '/', '/', '/']
-def : dump - dumpp - ROW -> NEW TABLE DETECTED : ['Main_table', 'LinMsg1', 'frame', 30.0, '/', '/', '/']
-def : dump - write_excel_line
-def : LDFstruct - table_attr - set_delay
-def : load - loadst - SEND : ['Main_table', 'LinMsg2', 'frame', 30.0, '/', '/', '/']
-def : dump - dumpp - ROW -> SLOTS IN SAME TABLE : ['LinMsg2', 'frame', 30.0, '/', '/', '/']
-def : dump - write_excel_line
-def : LDFstruct - table_attr - set_delay
-def : load - loadst - SEND : ['Main_table', 'LinStatus', 'frame', 30.0, '/', '/', '/']
-def : dump - dumpp - ROW -> SLOTS IN SAME TABLE : ['LinStatus', 'frame', 30.0, '/', '/', '/']
-def : dump - write_excel_line
-def : LDFstruct - table_attr - set_delay
-def : load - loadst - SEND : ['Extra_Table', 'LinExtra', 'frame', 10.0, '/', '/', '/']
-def : dump - dumpp - ROW -> NEW TABLE DETECTED : ['Extra_Table', 'LinExtra', 'frame', 10.0, '/', '/', '/']
-def : dump - write_excel_line
-def : LDFstruct - table_attr - set_delay
-def : load - loadst - SEND : ['Extra_Table', 'LinStatus', 'frame', 10.0, '/', '/', '/']
-def : dump - dumpp - ROW -> SLOTS IN SAME TABLE : ['LinStatus', 'frame', 10.0, '/', '/', '/']
-def : dump - write_excel_line
+LIN_protocol_version = "2.2";
+
+LIN_language_version = "2.2";
+
+LIN_speed = 19.2 kbps;
+
+def : dump - dumpp - MASTER : ['LINMaster', 'master', 1.0, 0.1, '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/']
+def : dump - dumpp - SLAVE : FrontLeftDoor
+def : dump - dumpp - SLAVE : RearLeftDoor
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'FrontLeftDoorSignal', 'SignalWidth': 8.0, 'SignalInitValue': 0.0, 'Publisher': 'FrontLeftDoor', 'Subscribers': 'LINMaster'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'FrontLeftDoorErrSig', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'FrontLeftDoor', 'Subscribers': 'LINMaster'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'RearLeftDoorSignal', 'SignalWidth': 8.0, 'SignalInitValue': 0.0, 'Publisher': 'RearLeftDoor', 'Subscribers': 'LINMaster'}
+def : dump - dumpp - SIGNAL - BUG :  {'SignalName': 'RearLeftDoorErrSig', 'SignalWidth': 1.0, 'SignalInitValue': 0.0, 'Publisher': 'RearLeftDoor', 'Subscribers': 'LINMaster'}
+def : dump - dumpp - FRAME : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorSignal', 0.0, 8.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FRAME : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorErrSig', 8.0, 1.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FRAME : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorSignal', 0.0, 8.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FRAME : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorErrSig', 8.0, 1.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - TRACE BUG : FrontLeftDoorMessage
+def : dump - dumpp - TRACE BUG : FrontLeftDoorMessage
+def : dump - dumpp - TRACE BUG : RearLeftDoorMessage
+def : dump - dumpp - TRACE BUG : RearLeftDoorMessage
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorSignal', 0.0, 8.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['FrontLeftDoorMessage', 1.0, 2.0, 'FrontLeftDoorErrSig', 8.0, 1.0, 0.0, 'FrontLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorSignal', 0.0, 8.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']
+def : dump - dumpp - FIND BUG : SIGNAL ENCODING : ['RearLeftDoorMessage', 2.0, 2.0, 'RearLeftDoorErrSig', 8.0, 1.0, 0.0, 'RearLeftDoor', 'LINMaster', '/']

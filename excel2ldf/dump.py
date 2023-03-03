@@ -326,91 +326,92 @@ def dumpp(infile, outfile):
     # Schedule tables (Required)
     sheet = 'Schedule Tables'
     table = wb.sheet_by_name(sheet)
-    f.write('Schedule_tables {\n')
 
-    nowtable = ''
-    # read and write schedule tables
-    for row in range(1, table.nrows):
-        st_data = table.row_values(row)
+    if table.nrows > 1:
+        f.write('Schedule_tables {\n')
+        nowtable = ''
+        # read and write schedule tables
+        for row in range(1, table.nrows):
+            st_data = table.row_values(row)
 
-        # common tables
-        if not st_data[2].startswith('assign'):
+            # common tables
+            if not st_data[2].startswith('assign'):
 
-            # new table detected
-            if st_data[0] != '':
+                # new table detected
+                if st_data[0] != '':
 
-                # first table in excel
-                if nowtable == '':
-                    f.write('\t' + st_data[0] + ' {\n')
-                    nowtable = st_data[0]
+                    # first table in excel
+                    if nowtable == '':
+                        f.write('\t' + st_data[0] + ' {\n')
+                        nowtable = st_data[0]
 
-                # other tables in excel
-                elif nowtable != '':
-                    f.write('\t}\n')
-                    f.write('\t' + st_data[0] + ' {\n')
-                    nowtable = st_data[0]
-                f.write('\t\t' + st_data[1] + ' delay ' + str(int(st_data[3])) + ' ms;\n')
+                    # other tables in excel
+                    elif nowtable != '':
+                        f.write('\t}\n')
+                        f.write('\t' + st_data[0] + ' {\n')
+                        nowtable = st_data[0]
+                    f.write('\t\t' + st_data[1] + ' delay ' + str(int(st_data[3])) + ' ms;\n')
 
-            # slots in current table
-            elif st_data[0] == '':
-                f.write('\t\t' + st_data[1] + ' delay ' + str(int(st_data[3])) + ' ms;\n')
+                # slots in current table
+                elif st_data[0] == '':
+                    f.write('\t\t' + st_data[1] + ' delay ' + str(int(st_data[3])) + ' ms;\n')
 
-        # assign tables (leak of other types tables)
-        else:
+            # assign tables (leak of other types tables)
+            else:
 
-            # use dict to convert data formats
-            assigndict = {'assign_nad': 'AssignNAD',
-                          'assign_frame_id_range': 'AssignFrameIdRange',
-                          'assign_frame_id': 'AssignFrameId'}
+                # use dict to convert data formats
+                assigndict = {'assign_nad': 'AssignNAD',
+                              'assign_frame_id_range': 'AssignFrameIdRange',
+                              'assign_frame_id': 'AssignFrameId'}
 
-            # new table detect
-            if st_data[0] != '':
+                # new table detect
+                if st_data[0] != '':
 
-                # first table in excel
-                if nowtable == '':
-                    f.write('\t' + st_data[0] + ' {\n')
-                    nowtable = st_data[0]
+                    # first table in excel
+                    if nowtable == '':
+                        f.write('\t' + st_data[0] + ' {\n')
+                        nowtable = st_data[0]
 
-                # other table in excel
-                elif nowtable != '':
-                    f.write('\t}\n')
-                    f.write('\t' + st_data[0] + ' {\n')
-                    nowtable = st_data[0]
+                    # other table in excel
+                    elif nowtable != '':
+                        f.write('\t}\n')
+                        f.write('\t' + st_data[0] + ' {\n')
+                        nowtable = st_data[0]
 
-                # writer assign tables
-                f.write('\t\t' + assigndict[st_data[2]] + ' {')
+                    # writer assign tables
+                    f.write('\t\t' + assigndict[st_data[2]] + ' {')
 
-                # assign nad
-                if st_data[2] == 'assign_nad':
-                    f.write(st_data[4] + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
-                # assign frame id range
-                elif st_data[2] == 'assign_frame_id_range':
-                    f.write(
-                        st_data[4] + ', ' + str(int(st_data[6])) + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
+                    # assign nad
+                    if st_data[2] == 'assign_nad':
+                        f.write(st_data[4] + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
+                    # assign frame id range
+                    elif st_data[2] == 'assign_frame_id_range':
+                        f.write(
+                            st_data[4] + ', ' + str(int(st_data[6])) + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
 
-                # assign frame id
-                elif st_data[2] == 'assign_frame_id':
-                    f.write(st_data[4] + ', ' + str(st_data[5]) + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
+                    # assign frame id
+                    elif st_data[2] == 'assign_frame_id':
+                        f.write(st_data[4] + ', ' + str(st_data[5]) + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
 
-            # slots in current table
-            elif st_data[0] == '':
+                # slots in current table
+                elif st_data[0] == '':
 
-                # write assign table
-                f.write('\t\t' + assigndict[st_data[2]] + ' {')
+                    # write assign table
+                    f.write('\t\t' + assigndict[st_data[2]] + ' {')
 
-                # assign nad
-                if st_data[2] == 'assign_nad':
-                    f.write(st_data[4] + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
+                    # assign nad
+                    if st_data[2] == 'assign_nad':
+                        f.write(st_data[4] + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
 
-                # assign frame id range
-                elif st_data[2] == 'assign_frame_id_range':
-                    f.write(
-                        st_data[4] + ', ' + str(int(st_data[6])) + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
+                    # assign frame id range
+                    elif st_data[2] == 'assign_frame_id_range':
+                        f.write(
+                            st_data[4] + ', ' + str(int(st_data[6])) + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
 
-                # assign frame id
-                elif st_data[2] == 'assign_frame_id':
-                    f.write(st_data[4] + ', ' + str(st_data[5]) + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
-    f.write('\t}\n}\n\n')
+                    # assign frame id
+                    elif st_data[2] == 'assign_frame_id':
+                        f.write(st_data[4] + ', ' + str(st_data[5]) + '}' + ' delay ' + str(int(st_data[3])) + ' ms;\n')
+        f.write('\t}\n}\n\n')
     # Signal encoding type (optional)
     sheet = 'Frame and Signal Attributes'
     table = wb.sheet_by_name(sheet)
